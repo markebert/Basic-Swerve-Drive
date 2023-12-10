@@ -119,7 +119,7 @@ public class ThreadedPIDController {
             final double startTime = Timer.getFPGATimestamp();
             if (started.compareAndSet(false, true)) {
                 executor.scheduleAtFixedRate(() -> {
-                    sensorValue = ((Supplier<Double>) sensor).get();
+                    sensorValue = sensor.get();
                     if (disablePID.get()) {
                         if (defaultZero) {
                             updateSensorLockValue(0);
