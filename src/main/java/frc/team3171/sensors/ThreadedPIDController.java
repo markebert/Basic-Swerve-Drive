@@ -8,10 +8,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.DoubleSupplier;
+import java.util.function.Supplier;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
 
 // Team 3171 Imports
 import static frc.team3171.HelperFunctions.Get_Gyro_Displacement;
@@ -146,7 +146,7 @@ public class ThreadedPIDController {
      *            of the sum and will set the PID value to the maximum value.
      *            Once set, this value cannot be changed during this instance.
      */
-    public ThreadedPIDController(Gyro sensor, double kP, double kI, double kD, double PID_MIN, double PID_MAX) {
+    public ThreadedPIDController(Supplier<Double> sensor, double kP, double kI, double kD, double PID_MIN, double PID_MAX) {
         this.sensor = sensor;
         this.sensorType = Sensor_Type.WPI;
         this.START_LOCK = new ReentrantLock();
@@ -189,7 +189,7 @@ public class ThreadedPIDController {
                             sensorValue = ((DoubleSupplier) sensor).getAsDouble();
                             break;
                         case WPI:
-                            sensorValue = ((Gyro) sensor).getAngle();
+                            sensorValue = ((Supplier<Double>) sensor).get();
                             break;
                         default:
                             sensorValue = 0;

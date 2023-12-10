@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // CTRE Imports
-import com.ctre.phoenix.sensors.WPI_Pigeon2;
+import com.ctre.phoenix6.hardware.Pigeon2;
 
 // Team 3171 Imports
 import frc.team3171.drive.SwerveDrive;
@@ -34,11 +34,11 @@ import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 public class Robot extends TimedRobot implements RobotProperties {
 
   // Controllers
-  private XboxController driveController, operatorController;
+  private XboxController driveController;
 
   // Drive Objects
   private SwerveDrive swerveDrive;
-  private WPI_Pigeon2 gyro;
+  private Pigeon2 gyro;
   private ThreadedPIDController gyroPIDController;
 
   // Auton Recorder
@@ -71,11 +71,11 @@ public class Robot extends TimedRobot implements RobotProperties {
     swerveDrive = new SwerveDrive(lr_Unit_Config, lf_Unit_Config, rf_Unit_Config, rr_Unit_Config);
 
     // Sensors
-    gyro = new WPI_Pigeon2(GYRO_CAN_ID, GYRO_CAN_BUS);
+    gyro = new Pigeon2(GYRO_CAN_ID);
     gyro.reset();
 
     // PID Controllers
-    gyroPIDController = new ThreadedPIDController(gyro, GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX);
+    gyroPIDController = new ThreadedPIDController(gyro.getYaw().asSupplier(), GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX);
     gyroPIDController.start();
 
     // Auton Recorder init
@@ -258,7 +258,7 @@ public class Robot extends TimedRobot implements RobotProperties {
   public void teleopPeriodic() {
     // Get the controller states
     final XboxControllerState driveControllerState = new XboxControllerState(driveController);
-    final XboxControllerState operatorControllerState = new XboxControllerState(operatorController);
+    final XboxControllerState operatorControllerState = new XboxControllerState();
 
     // Robot drive controls
     robotControlsPeriodic(driveControllerState, operatorControllerState);
