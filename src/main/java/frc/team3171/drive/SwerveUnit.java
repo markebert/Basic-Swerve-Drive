@@ -20,6 +20,7 @@ import com.revrobotics.SparkMaxAbsoluteEncoder;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
+import frc.team3171.HelperFunctions;
 import frc.team3171.drive.SwerveUnitConfig.MOTOR_TYPE;
 import frc.team3171.sensors.ThreadedPIDController;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
@@ -201,8 +202,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // TODO Verify how to return the vlaue of the rev through bore encoder through
         // the spark max used for the slew motor and
         // its returned ranges.
-        ;
-        return Normalize_Gryo_Value(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition() - startingAngle);
+        final double mappedEncoderAngle = HelperFunctions.Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+        return Normalize_Gryo_Value(mappedEncoderAngle - startingAngle);
     }
 
     /**
