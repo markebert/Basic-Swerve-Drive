@@ -143,10 +143,10 @@ public class SwerveDrive implements RobotProperties {
     }
 
     public void zero() {
-        lrUnit.zeroModule();
-        lfUnit.zeroModule();
+        lrUnit.zeroModule(180);
+        lfUnit.zeroModule(-90);
         rfUnit.zeroModule();
-        rrUnit.zeroModule();
+        rrUnit.zeroModule(90);
         final double lrSlewOffset = lrUnit.getSlewOffset();
         final double lfSlewOffset = lfUnit.getSlewOffset();
         final double rfSlewOffset = rfUnit.getSlewOffset();

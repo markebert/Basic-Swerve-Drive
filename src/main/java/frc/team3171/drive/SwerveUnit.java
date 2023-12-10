@@ -46,7 +46,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * Constructor
      * 
      * @param driveInverted
-     *                      The config settings for the swerve unit.
+     *            The config settings for the swerve unit.
      */
     public SwerveUnit(final SwerveUnitConfig swerveUnitConfig) {
         // Init the slew motor
@@ -88,7 +88,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * Sets the drive motor to the desired speed.
      * 
      * @param speed
-     *              The speed, from -1.0 to 1.0, to set the drive motor to.
+     *            The speed, from -1.0 to 1.0, to set the drive motor to.
      */
     public void setDriveSpeed(final double speed) {
         /*
@@ -111,8 +111,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * Sets whether or not the direction of the drive motor needs to be inverted.
      * 
      * @param inverted
-     *                 Whether or not the direction of the drive motor need to be
-     *                 inverted.
+     *            Whether or not the direction of the drive motor need to be
+     *            inverted.
      */
     public void setDriveInverted(final boolean inverted) {
         /*
@@ -139,7 +139,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * Sets the slew motor to the desired angle.
      * 
      * @param angle
-     *              The angle, from -180.0 to 180.0, to set the slew motor to.
+     *            The angle, from -180.0 to 180.0, to set the slew motor to.
      */
     public void updateSlewAngle(final double angle) {
         // Update the target angle of slew motor PID controller
@@ -162,7 +162,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * Sets the slew motor to the desired speed.
      * 
      * @param speed
-     *              The speed, from -1.0 to 1.0, to set the slew motor to.
+     *            The speed, from -1.0 to 1.0, to set the slew motor to.
      */
     public void setSlewSpeed(final double speed) {
         slewMotor.set(speed);
@@ -202,7 +202,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // TODO Verify how to return the vlaue of the rev through bore encoder through
         // the spark max used for the slew motor and
         // its returned ranges.
-        final double mappedEncoderAngle = HelperFunctions.Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+        final double mappedEncoderAngle = HelperFunctions
+                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
         return Normalize_Gryo_Value(mappedEncoderAngle - startingAngle);
     }
 
@@ -242,11 +243,14 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         return getSlewAngle();
     }
 
+    public void zeroModule(final double slewOffset) {
+        final double mappedEncoderAngle = HelperFunctions
+                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+        startingAngle = Normalize_Gryo_Value(mappedEncoderAngle - slewOffset);
+    }
+
     public void zeroModule() {
-        // TODO Verify how to return the vlaue of the rev through bore encoder through
-        // the spark max used for the slew motor and
-        // its returned ranges.
-        startingAngle = ((CANSparkMax) slewMotor).getAlternateEncoder(2048).getPosition();
+        zeroModule(0);
     }
 
     public double getSlewOffset() {
