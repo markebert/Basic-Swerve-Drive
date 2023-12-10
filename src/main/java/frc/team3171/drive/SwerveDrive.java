@@ -220,6 +220,11 @@ public class SwerveDrive implements RobotProperties {
         SmartDashboard.putString("RF Speed", String.format("%.2f", rfUnit.getDriveSpeed()));
         SmartDashboard.putString("RR Speed", String.format("%.2f", rrUnit.getDriveSpeed()));
 
+        SmartDashboard.putString("LF Position", String.format("%.2f", lfUnit.getIntegratedEncoderValue()));
+        SmartDashboard.putString("LR Position", String.format("%.2f", lrUnit.getIntegratedEncoderValue()));
+        SmartDashboard.putString("RF Position", String.format("%.2f", rfUnit.getIntegratedEncoderValue()));
+        SmartDashboard.putString("RR Position", String.format("%.2f", rrUnit.getIntegratedEncoderValue()));
+
         SmartDashboard.putString("LR Slew Angle", String.format("%.2f | %.2f", lrUnit.getSlewAngle(), lrUnit.getSlewTargetAngle()));
         SmartDashboard.putString("LF Slew Angle", String.format("%.2f | %.2f", lfUnit.getSlewAngle(), lfUnit.getSlewTargetAngle()));
         SmartDashboard.putString("RF Slew Angle", String.format("%.2f | %.2f", rfUnit.getSlewAngle(), rfUnit.getSlewTargetAngle()));
