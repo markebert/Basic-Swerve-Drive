@@ -2,6 +2,7 @@ package frc.team3171.drive;
 
 // Java Imports
 import java.util.function.DoubleSupplier;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
@@ -23,6 +24,7 @@ import frc.robot.RobotProperties;
 import frc.team3171.HelperFunctions;
 import frc.team3171.drive.SwerveUnitConfig.MOTOR_TYPE;
 import frc.team3171.sensors.ThreadedPIDController;
+
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 
 /**
@@ -38,6 +40,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
 
     // PID Controller
     private final ThreadedPIDController slewPIDController;
+    public final ConcurrentLinkedQueue<String> slewPIDData = new ConcurrentLinkedQueue<String>();
 
     // Global Variables
     private double startingAngle;
@@ -76,9 +79,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         }
 
         // Init the gyro PID controller
-        slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX,
-                true);
-        slewPIDController.start(true);
+        slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX, true);
+        slewPIDController.start(20, true, slewPIDData);
 
         // Init the global variables
         startingAngle = 0;
