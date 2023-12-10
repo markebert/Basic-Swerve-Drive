@@ -16,6 +16,7 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.SparkMaxAbsoluteEncoder;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
@@ -200,7 +201,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // TODO Verify how to return the vlaue of the rev through bore encoder through
         // the spark max used for the slew motor and
         // its returned ranges.
-        return Normalize_Gryo_Value(((CANSparkMax) slewMotor).getAlternateEncoder(2048).getPosition() - startingAngle);
+        ;
+        return Normalize_Gryo_Value(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition() - startingAngle);
     }
 
     /**
