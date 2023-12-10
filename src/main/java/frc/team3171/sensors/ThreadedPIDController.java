@@ -7,7 +7,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
 // FRC Imports
@@ -26,8 +25,7 @@ public class ThreadedPIDController {
      * Objects
      */
     private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
-    private final Object sensor;
-    private final Sensor_Type sensorType;
+    private final Supplier<Double> sensor;
     private final ReentrantLock START_LOCK, PID_LOCK;
     private final AtomicBoolean started, disablePID, continuous;
 
@@ -45,10 +43,6 @@ public class ThreadedPIDController {
     private volatile double kP, kI, kD;
     private final double PID_MIN, PID_MAX;
 
-    private enum Sensor_Type {
-        WPI, Custom
-    }
-
     /**
      * Constructor
      * 
@@ -88,72 +82,13 @@ public class ThreadedPIDController {
      *            of the sum and will set the PID value to the maximum value.
      *            Once set, this value cannot be changed during this instance.
      */
-    public ThreadedPIDController(DoubleSupplier sensor, double kP, double kI, double kD, double PID_MIN, double PID_MAX, boolean continuous) {
+    public ThreadedPIDController(Supplier<Double> sensor, double kP, double kI, double kD, double PID_MIN, double PID_MAX, boolean continuous) {
         this.sensor = sensor;
-        this.sensorType = Sensor_Type.Custom;
         this.START_LOCK = new ReentrantLock();
         this.PID_LOCK = new ReentrantLock();
         this.started = new AtomicBoolean();
         this.disablePID = new AtomicBoolean(true);
         this.continuous = new AtomicBoolean(continuous);
-
-        this.pidValue = 0;
-        this.sensorValue = 0;
-        this.sensorLockValue = 0;
-        this.kP = kP;
-        this.kI = kI;
-        this.kD = kD;
-        this.PID_MIN = PID_MIN;
-        this.PID_MAX = PID_MAX;
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param sensor
-     *            The sensor that the {@code PIDController} will get its sensor
-     *            values from. This object must implement the {@code Sensor}
-     *            Interface. Once set, this {@code DoubleSupplier} cannot be
-     *            changed during this instance.
-     * @param kP
-     *            The proportional value constant for the {@code PIDController}.
-     *            This value is arbitrary and based upon testing of the
-     *            {@code PIDController} to find the values that works best for
-     *            your system. Once set, this values cannot be changed during
-     *            this instance.
-     * @param kI
-     *            The Integral value constant for the {@code PIDController}.
-     *            This value is arbitrary and based upon testing of the
-     *            {@code PIDController} to find the values that works best for
-     *            your system. Once set, this value cannot be changed during
-     *            this instance.
-     * @param kD
-     *            The Derivative value constant for the {@code PIDController}.
-     *            This value is arbitrary and based upon testing of the
-     *            {@code PIDController} to find the values that works best for
-     *            your system. Once set, this value cannot be changed during
-     *            this instance.
-     * @param PID_MIN
-     *            The minimum value that the {@code PIDController} is allowed
-     *            obtain. If the value becomes smaller then the given constant,
-     *            then the {@code PIDController} will also prevent accumulation
-     *            of the sum and will set the PID value to the minimum value.
-     *            Once set, this value cannot be changed during this instance.
-     * @param PID_MAX
-     *            The maximum value that the {@code PIDController} is allowed
-     *            obtain. If the value becomes larger then the given constant,
-     *            then the {@code PIDController} will also prevent accumulation
-     *            of the sum and will set the PID value to the maximum value.
-     *            Once set, this value cannot be changed during this instance.
-     */
-    public ThreadedPIDController(Supplier<Double> sensor, double kP, double kI, double kD, double PID_MIN, double PID_MAX) {
-        this.sensor = sensor;
-        this.sensorType = Sensor_Type.WPI;
-        this.START_LOCK = new ReentrantLock();
-        this.PID_LOCK = new ReentrantLock();
-        this.started = new AtomicBoolean();
-        this.disablePID = new AtomicBoolean(true);
-        this.continuous = new AtomicBoolean(true);
 
         this.pidValue = 0;
         this.sensorValue = 0;
@@ -184,17 +119,7 @@ public class ThreadedPIDController {
             final double startTime = Timer.getFPGATimestamp();
             if (started.compareAndSet(false, true)) {
                 executor.scheduleAtFixedRate(() -> {
-                    switch (sensorType) {
-                        case Custom:
-                            sensorValue = ((DoubleSupplier) sensor).getAsDouble();
-                            break;
-                        case WPI:
-                            sensorValue = ((Supplier<Double>) sensor).get();
-                            break;
-                        default:
-                            sensorValue = 0;
-                            break;
-                    }
+                    sensorValue = ((Supplier<Double>) sensor).get();
                     if (disablePID.get()) {
                         if (defaultZero) {
                             updateSensorLockValue(0);

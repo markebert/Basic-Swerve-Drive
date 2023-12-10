@@ -75,7 +75,7 @@ public class Robot extends TimedRobot implements RobotProperties {
     gyro.reset();
 
     // PID Controllers
-    gyroPIDController = new ThreadedPIDController(gyro.getYaw().asSupplier(), GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX);
+    gyroPIDController = new ThreadedPIDController(gyro.getYaw().asSupplier(), GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX, true);
     gyroPIDController.start();
 
     // Auton Recorder init

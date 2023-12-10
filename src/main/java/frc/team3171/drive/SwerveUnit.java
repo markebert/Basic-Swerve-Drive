@@ -76,7 +76,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         }
 
         // Init the gyro PID controller
-        slewPIDController = new ThreadedPIDController(this, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX,
+        slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX,
                 true);
         slewPIDController.start(true);
 
