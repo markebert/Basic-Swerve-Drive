@@ -200,10 +200,6 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * @return The current position, in degrees, from -180 to 180.
      */
     public double getSlewAngle() {
-
-        // TODO Verify how to return the vlaue of the rev through bore encoder through
-        // the spark max used for the slew motor and
-        // its returned ranges.
         final double mappedEncoderAngle = HelperFunctions
                 .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
         return Normalize_Gryo_Value(mappedEncoderAngle - startingAngle);
