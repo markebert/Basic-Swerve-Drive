@@ -345,11 +345,11 @@ public class Robot extends TimedRobot implements RobotProperties {
     final double fieldCorrectedAngle = FIELD_ORIENTED_SWERVE ? Normalize_Gryo_Value(leftStickAngle - gyroValue) : leftStickAngle;
 
     // Drive Controls
-    final boolean slowMode = driveControllerState.getLeftBumper() || driveControllerState.getRightBumper();
+    final boolean boostMode = driveControllerState.getLeftBumper() || driveControllerState.getRightBumper();
     if (rightStickX != 0) {
       // Manual turning
       gyroPIDController.disablePID();
-      swerveDrive.drive(fieldCorrectedAngle, leftStickMagnitude, rightStickX, slowMode);
+      swerveDrive.drive(fieldCorrectedAngle, leftStickMagnitude, rightStickX, boostMode);
     } else {
       // Normal gyro locking
       gyroPIDController.enablePID();
@@ -366,7 +366,7 @@ public class Robot extends TimedRobot implements RobotProperties {
       } else if (driveControllerState.getXButton()) {
         gyroPIDController.updateSensorLockValueWithoutReset(-90);
       }
-      swerveDrive.drive(fieldCorrectedAngle, leftStickMagnitude, FIELD_ORIENTED_SWERVE ? gyroPIDController.getPIDValue() : 0, slowMode);
+      swerveDrive.drive(fieldCorrectedAngle, leftStickMagnitude, FIELD_ORIENTED_SWERVE ? gyroPIDController.getPIDValue() : 0, boostMode);
     }
 
   }

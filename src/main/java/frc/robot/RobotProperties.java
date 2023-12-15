@@ -16,7 +16,7 @@ public interface RobotProperties {
         /** Drive Variables **/
         public static final boolean FIELD_ORIENTED_SWERVE = true;
         public static final double JOYSTICK_DEADZONE = .08;
-        public static final double SLOW_DRIVE_SPEED = .6, MAX_ROTATION_SPEED = .6;
+        public static final double MAX_DRIVE_SPEED = .25, MAX_ROTATION_SPEED = .6;
 
         /** Swerve Unit Configuration **/
         public static final SwerveUnitConfig lr_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 5, false,
@@ -33,7 +33,7 @@ public interface RobotProperties {
 
         /** PID Properties **/
         public static final double GYRO_KP = .013, GYRO_KI = .00075, GYRO_KD = .00075, GYRO_MIN = -.5, GYRO_MAX = .5;
-        public static final double SLEW_KP = -.005, SLEW_KI = -.0004, SLEW_KD = .05, SLEW_KF = 0, SLEW_PID_MIN = -.5, SLEW_PID_MAX = .5;
+        public static final double SLEW_KP = -.005, SLEW_KI = -.0004, SLEW_KD = .06, SLEW_KF = 0, SLEW_PID_MIN = -.5, SLEW_PID_MAX = .5;
 
         /** Auton Mode Constants **/
         public static final String DEFAULT_AUTON = "Disabled";

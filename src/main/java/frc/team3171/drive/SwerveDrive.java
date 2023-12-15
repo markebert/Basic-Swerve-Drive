@@ -52,7 +52,7 @@ public class SwerveDrive implements RobotProperties {
         rrUnit.enable();
     }
 
-    public void drive(final double driveAngle, final double driveMagnitude, final double rotationalMagnitude, final boolean slowMode) {
+    public void drive(final double driveAngle, final double driveMagnitude, final double rotationalMagnitude, final boolean boostMode) {
         double lfMagnitude, lrMagnitude, rfMagnitude, rrMagnitude;
         if (driveMagnitude != 0 || rotationalMagnitude != 0) {
             // Create the initial vector
@@ -74,20 +74,11 @@ public class SwerveDrive implements RobotProperties {
             final double[] largestVector = Return_Vector_With_Largest_Magnitude(lfResultantVector, lrResultantVector, rfResultantVector,
                     rrResultantVector);
 
-            // Scale the magnitudes if the largest vector exceeds 1.0
-            if (largestVector[1] > 1.0) {
-                // Update the magnitudes
-                lfMagnitude = Map(lfResultantVector[1], 0, largestVector[1], 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                lrMagnitude = Map(lrResultantVector[1], 0, largestVector[1], 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                rfMagnitude = Map(rfResultantVector[1], 0, largestVector[1], 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                rrMagnitude = Map(rrResultantVector[1], 0, largestVector[1], 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-            } else {
-                // Update the magnitudes
-                lfMagnitude = Map(lfResultantVector[1], 0, 1, 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                lrMagnitude = Map(lrResultantVector[1], 0, 1, 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                rfMagnitude = Map(rfResultantVector[1], 0, 1, 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-                rrMagnitude = Map(rrResultantVector[1], 0, 1, 0, slowMode ? SLOW_DRIVE_SPEED : 1);
-            }
+            // Update the magnitudes, if the largest vector exceeds 1.0 then scale all others relative to it
+            lfMagnitude = Map(lfResultantVector[1], 0, largestVector[1] > 1 ? largestVector[1] : 1, 0, boostMode ? 1 : MAX_DRIVE_SPEED);
+            lrMagnitude = Map(lrResultantVector[1], 0, largestVector[1] > 1 ? largestVector[1] : 1, 0, boostMode ? 1 : MAX_DRIVE_SPEED);
+            rfMagnitude = Map(rfResultantVector[1], 0, largestVector[1] > 1 ? largestVector[1] : 1, 0, boostMode ? 1 : MAX_DRIVE_SPEED);
+            rrMagnitude = Map(rrResultantVector[1], 0, largestVector[1] > 1 ? largestVector[1] : 1, 0, boostMode ? 1 : MAX_DRIVE_SPEED);
         } else {
             // Keep the current wheel angles but update the magnitudes
             lfMagnitude = 0;
