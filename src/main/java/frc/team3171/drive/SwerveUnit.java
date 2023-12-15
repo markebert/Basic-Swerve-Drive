@@ -2,7 +2,6 @@ package frc.team3171.drive;
 
 // Java Imports
 import java.util.function.DoubleSupplier;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
@@ -40,7 +39,6 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
 
     // PID Controller
     private final ThreadedPIDController slewPIDController;
-    public final ConcurrentLinkedQueue<String> slewPIDData = new ConcurrentLinkedQueue<String>();
 
     // Global Variables
     private double startingAngle;
@@ -80,7 +78,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
 
         // Init the gyro PID controller
         slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX, true);
-        slewPIDController.start(20, true, slewPIDData);
+        slewPIDController.start(true);
 
         // Init the global variables
         startingAngle = 0;
