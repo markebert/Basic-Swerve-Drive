@@ -11,6 +11,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -113,6 +115,11 @@ public class Robot extends TimedRobot implements RobotProperties {
 
     // Edge Trigger Init
     zeroEdgeTrigger = false;
+
+    Shuffleboard.getTab("").add("Slew kP", SLEW_KP).withWidget(BuiltInWidgets.kField);
+    Shuffleboard.getTab("").add("Slew kI", SLEW_KI).withWidget(BuiltInWidgets.kField);
+    Shuffleboard.getTab("").add("Slew kD", SLEW_KD).withWidget(BuiltInWidgets.kField);
+    Shuffleboard.getTab("").add("Slew kF", SLEW_KF).withWidget(BuiltInWidgets.kField);
   }
 
   @Override
