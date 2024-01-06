@@ -14,9 +14,9 @@ import com.ctre.phoenix6.configs.CANcoderConfiguration;
 
 // REV Imports
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.revrobotics.SparkMaxAbsoluteEncoder;
+import com.revrobotics.SparkAbsoluteEncoder;
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
@@ -199,7 +199,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      */
     public double getSlewAngle() {
         final double mappedEncoderAngle = HelperFunctions
-                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
         return Normalize_Gryo_Value(mappedEncoderAngle - startingAngle);
     }
 
@@ -241,7 +241,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
 
     public void zeroModule(final double slewOffset) {
         final double mappedEncoderAngle = HelperFunctions
-                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkMaxAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
         startingAngle = Normalize_Gryo_Value(mappedEncoderAngle - slewOffset);
     }
 
