@@ -33,7 +33,7 @@ public interface RobotProperties {
 
         /** PID Properties **/
         public static final double GYRO_KP = .013, GYRO_KI = .00075, GYRO_KD = .00075, GYRO_MIN = -.5, GYRO_MAX = .5;
-        public static final double SLEW_KP = -.005, SLEW_KI = -.0004, SLEW_KD = .06, SLEW_KF = 0, SLEW_PID_MIN = -.5, SLEW_PID_MAX = .5;
+        public static final double SLEW_KP = -.005, SLEW_KI = -.0004, SLEW_KD = .035, SLEW_KF = 0, SLEW_PID_MIN = -1, SLEW_PID_MAX = 1;
 
         /** Auton Mode Constants **/
         public static final String DEFAULT_AUTON = "Disabled";

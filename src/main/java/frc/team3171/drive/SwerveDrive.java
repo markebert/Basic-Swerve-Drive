@@ -42,7 +42,7 @@ public class SwerveDrive implements RobotProperties {
         this.rrUnit = new SwerveUnit(rrUnitConfig);
 
         try {
-            udpClient = new UDPClient(this.rfUnit.slewPIDData, "172.22.11.1", 5801);
+            udpClient = new UDPClient(this.rfUnit.slewPIDData, "10.31.71.201", 5801);
             udpClient.start();
         } catch (IOException ex) {
             ex.printStackTrace();
