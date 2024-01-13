@@ -16,7 +16,7 @@ public interface RobotProperties {
         /** Drive Variables **/
         public static final boolean FIELD_ORIENTED_SWERVE = true;
         public static final double JOYSTICK_DEADZONE = .08;
-        public static final double MAX_DRIVE_SPEED = .25, MAX_ROTATION_SPEED = .6;
+        public static final double MAX_DRIVE_SPEED = .5, MAX_ROTATION_SPEED = .6;
 
         /** Swerve Unit Configuration **/
         public static final SwerveUnitConfig lr_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 5, false,

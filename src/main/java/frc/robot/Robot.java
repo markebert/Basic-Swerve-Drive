@@ -143,16 +143,12 @@ public class Robot extends TimedRobot implements RobotProperties {
       rightStickX = HelperFunctions.Deadzone_With_Map(JOYSTICK_DEADZONE, driveController.getRightX(), -MAX_ROTATION_SPEED, MAX_ROTATION_SPEED);
 
       // Calculate the left stick angle and magnitude
-      if (leftStickX != 0 || leftStickY != 0) {
-        leftStickAngle = Normalize_Gryo_Value(Math.toDegrees(Math.atan2(leftStickX, leftStickY)));
-        leftStickMagnitude = Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(leftStickY, 2));
-        if (leftStickMagnitude > 1.0) {
-          leftStickMagnitude = 1;
-        }
-      } else {
-        leftStickAngle = 0;
-        leftStickMagnitude = 0;
+      leftStickAngle = Normalize_Gryo_Value(Math.toDegrees(Math.atan2(leftStickX, leftStickY)));
+      leftStickMagnitude = Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(leftStickY, 2));
+      if (leftStickMagnitude > 1.0) {
+        leftStickMagnitude = 1;
       }
+
       fieldCorrectedAngle = Normalize_Gryo_Value(leftStickAngle - gyroValue);
     } else {
       leftStickX = 0;
@@ -328,17 +324,12 @@ public class Robot extends TimedRobot implements RobotProperties {
     final double rightStickX = HelperFunctions.Deadzone_With_Map(JOYSTICK_DEADZONE, driveControllerState.getRightX(), -MAX_ROTATION_SPEED, MAX_ROTATION_SPEED);
 
     // Calculate the left stick angle and magnitude
-    final double leftStickAngle;
+    // Calculate the left stick angle and magnitude
+    final double leftStickAngle = Normalize_Gryo_Value(Math.toDegrees(Math.atan2(leftStickX, leftStickY)));
     double leftStickMagnitude;
-    if (leftStickX != 0 || leftStickY != 0) {
-      leftStickAngle = Normalize_Gryo_Value(Math.toDegrees(Math.atan2(leftStickX, leftStickY)));
-      leftStickMagnitude = Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(leftStickY, 2));
-      if (leftStickMagnitude > 1.0) {
-        leftStickMagnitude = 1;
-      }
-    } else {
-      leftStickAngle = 0;
-      leftStickMagnitude = 0;
+    leftStickMagnitude = Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(leftStickY, 2));
+    if (leftStickMagnitude > 1.0) {
+      leftStickMagnitude = 1;
     }
 
     // Calculate the field corrected drive angle
