@@ -22,9 +22,9 @@ import com.revrobotics.CANSparkLowLevel.MotorType;
 // Team 3171 Imports
 import frc.robot.RobotProperties;
 import frc.team3171.HelperFunctions;
+import frc.team3171.drive.SwerveUnitConfig.ENCODER_TYPE;
 import frc.team3171.drive.SwerveUnitConfig.MOTOR_TYPE;
 import frc.team3171.sensors.ThreadedPIDController;
-
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 
 /**
@@ -35,7 +35,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
     // Motor Controllers
     private final CANSparkMax driveMotor, slewMotor;
 
-    // CANCoder
+    // Absolute Encoder
+    private final ENCODER_TYPE selectedEncoderType;
     private final CANcoder absoluteEncoder;
 
     // PID Controller
@@ -54,20 +55,20 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
     public SwerveUnit(final SwerveUnitConfig swerveUnitConfig) {
         // Init the slew motor
         slewMotor = new CANSparkMax(swerveUnitConfig.getSLEW_MOTOR_CAN_ID(), MotorType.kBrushless);
-        ((CANSparkMax) slewMotor).setIdleMode(IdleMode.kBrake);
+        slewMotor.setIdleMode(IdleMode.kBrake);
         slewMotor.setInverted(swerveUnitConfig.isSLEW_MOTOR_INVERTED());
 
         // Init the drive motor
 
         driveMotor = new CANSparkMax(swerveUnitConfig.getDRIVE_MOTOR_CAN_ID(), MotorType.kBrushless);
-        ((CANSparkMax) driveMotor).setIdleMode(IdleMode.kBrake);
+        driveMotor.setIdleMode(IdleMode.kBrake);
         driveMotor.setInverted(swerveUnitConfig.isDRIVE_MOTOR_INVERTED());
 
         // Init the absolute position encoder used for the slew angle
-        switch (swerveUnitConfig.getABSOLUTE_ENCODER_TYPE()) {
+        selectedEncoderType = swerveUnitConfig.getABSOLUTE_ENCODER_TYPE();
+        switch (selectedEncoderType) {
             case CTRE:
-                absoluteEncoder = new CANcoder(swerveUnitConfig.getABSOLUTE_ENCODER_CAN_ID(),
-                        swerveUnitConfig.getCANBUS());
+                absoluteEncoder = new CANcoder(swerveUnitConfig.getABSOLUTE_ENCODER_CAN_ID(), swerveUnitConfig.getCANBUS());
                 CANcoderConfiguration absoluteEncoderConfiguration = new CANcoderConfiguration();
                 absoluteEncoderConfiguration.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
                 absoluteEncoder.getConfigurator().apply(absoluteEncoderConfiguration);
@@ -80,7 +81,8 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
 
         // Init the gyro PID controller
         slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX, true);
-        slewPIDController.start(20, true, slewPIDData);
+        // slewPIDController.start(20, true, slewPIDData);
+        slewPIDController.start(20, true, null);
 
         // Init the global variables
         startingAngle = 0;
@@ -200,8 +202,19 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * @return The current position, in degrees, from -180 to 180.
      */
     public double getSlewAngle() {
-        final double mappedEncoderAngle = HelperFunctions
-                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+        final double mappedEncoderAngle;
+
+        // Get the absolute encoder value based on encoder type
+        switch (selectedEncoderType) {
+            case CTRE:
+                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+                break;
+            default:
+                // Assumes the encoder is wired into the slew motor spark max
+                mappedEncoderAngle = HelperFunctions.Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1,
+                        0, 360);
+                break;
+        }
         return Normalize_Gryo_Value(mappedEncoderAngle - startingAngle);
     }
 
@@ -220,7 +233,18 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      * @return The velocity, in degrees per second.
      */
     public double getSlewVelocity() {
-        return absoluteEncoder.getVelocity().getValueAsDouble();
+        final double slewVelocity;
+        // Get the absolute encoder value based on encoder type
+        switch (selectedEncoderType) {
+            case CTRE:
+                slewVelocity = absoluteEncoder.getVelocity().getValueAsDouble();
+                break;
+            default:
+                // Assumes the encoder is wired into the slew motor spark max
+                slewVelocity = slewMotor.getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getVelocity();
+                break;
+        }
+        return slewVelocity;
     }
 
     public void enable() {
@@ -242,8 +266,19 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
     }
 
     public void zeroModule(final double slewOffset) {
-        final double mappedEncoderAngle = HelperFunctions
-                .Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1, 0, 360);
+        final double mappedEncoderAngle;
+
+        // Get the absolute encoder value based on encoder type
+        switch (selectedEncoderType) {
+            case CTRE:
+                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+                break;
+            default:
+                // Assumes the encoder is wired into the slew motor spark max
+                mappedEncoderAngle = HelperFunctions.Map(((CANSparkMax) slewMotor).getAbsoluteEncoder(SparkAbsoluteEncoder.Type.kDutyCycle).getPosition(), 0, 1,
+                        0, 360);
+                break;
+        }
         startingAngle = Normalize_Gryo_Value(mappedEncoderAngle - slewOffset);
     }
 
