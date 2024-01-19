@@ -58,8 +58,14 @@ public class UDPClient implements Runnable {
         }
     }
 
+    public void start(final int updateRate) {
+        if (MESSAGE_BUFFER != null) {
+            es.scheduleAtFixedRate(this, 0, updateRate, TimeUnit.MILLISECONDS);
+        }
+    }
+
     public void start() {
-        es.scheduleAtFixedRate(this, 0, 10, TimeUnit.MILLISECONDS);
+        start(10);
     }
 
     public void close() {

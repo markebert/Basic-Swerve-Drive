@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
-//import frc.team3171.sensors.UDPClient;
+import frc.team3171.sensors.UDPClient;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 import static frc.team3171.HelperFunctions.Add_Two_Vectors;
 import static frc.team3171.HelperFunctions.Return_Vector_With_Largest_Magnitude;
@@ -31,7 +31,8 @@ public class SwerveDrive implements RobotProperties {
     // Global Variables
     private volatile double lrAngle = 0, lfAngle = 0, rfAngle = 0, rrAngle = 0;
 
-    // private UDPClient udpClient;
+    // PID Data Logger
+    private UDPClient udpClient;
 
     public SwerveDrive(final SwerveUnitConfig lrUnitConfig, final SwerveUnitConfig lfUnitConfig, final SwerveUnitConfig rfUnitConfig,
             final SwerveUnitConfig rrUnitConfig) {
@@ -40,14 +41,12 @@ public class SwerveDrive implements RobotProperties {
         this.rfUnit = new SwerveUnit(rfUnitConfig);
         this.rrUnit = new SwerveUnit(rrUnitConfig);
 
-        /*
-         * try {
-         * udpClient = new UDPClient(this.rfUnit.slewPIDData, "10.31.71.201", 5801);
-         * udpClient.start();
-         * } catch (IOException ex) {
-         * ex.printStackTrace();
-         * }
-         */
+        try {
+            udpClient = new UDPClient(rfUnit.getSlewPIDData(), "10.31.71.201", 5801);
+            udpClient.start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         loadSlewCalibration();
     }
