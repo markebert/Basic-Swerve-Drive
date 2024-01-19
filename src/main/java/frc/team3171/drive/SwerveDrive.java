@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
 
 // FRC Imports
@@ -45,17 +46,19 @@ public class SwerveDrive implements RobotProperties {
 
         // Setup PID logging, if enabled in swerve unit config
         try {
+            udpClients = new LinkedList<UDPClient>();
             udpClients.add(new UDPClient(lrUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5801));
             udpClients.add(new UDPClient(lfUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5802));
             udpClients.add(new UDPClient(rfUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5803));
             udpClients.add(new UDPClient(rrUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5804));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
 
-        udpClients.forEach(client -> {
-            client.start();
-        });
+            udpClients.forEach(client -> {
+                client.start();
+            });
+        } catch (IOException ex) {
+            // Do Nothing
+            // ex.printStackTrace();
+        }
 
         // Load the save slew calibrations
         loadSlewCalibration();
