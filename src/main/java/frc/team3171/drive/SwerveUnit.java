@@ -283,7 +283,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // Get the absolute encoder value based on encoder type
         switch (selectedEncoderType) {
             case CTRE:
-                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * -360.0;
                 break;
             default:
                 // Assumes the encoder is wired into the slew motor spark max
