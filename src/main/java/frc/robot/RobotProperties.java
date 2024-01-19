@@ -19,16 +19,17 @@ public interface RobotProperties {
         public static final double JOYSTICK_DEADZONE = .08;
         public static final double MAX_DRIVE_SPEED = .5, MAX_ROTATION_SPEED = .6;
         public static final boolean PINWHEEL_ZERO_ORIENTATION = true;
+        public static final boolean SWERVE_UNIT_ORIENTATION_OPTIMIZATION = true;
 
         /** Swerve Unit Configuration **/
         public static final SwerveUnitConfig lr_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 5, false,
-                        MOTOR_TYPE.CTRE, 4, false, ENCODER_TYPE.REV, 18);
+                        MOTOR_TYPE.CTRE, 4, false, ENCODER_TYPE.REV, 18, false);
         public static final SwerveUnitConfig lf_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 3, false,
-                        MOTOR_TYPE.CTRE, 2, false, ENCODER_TYPE.REV, 19);
+                        MOTOR_TYPE.CTRE, 2, false, ENCODER_TYPE.REV, 19, false);
         public static final SwerveUnitConfig rf_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 7, false,
-                        MOTOR_TYPE.CTRE, 6, false, ENCODER_TYPE.REV, 20);
+                        MOTOR_TYPE.CTRE, 6, false, ENCODER_TYPE.REV, 20, false);
         public static final SwerveUnitConfig rr_Unit_Config = new SwerveUnitConfig(MOTOR_TYPE.REV, 9, false,
-                        MOTOR_TYPE.CTRE, 8, false, ENCODER_TYPE.REV, 21);
+                        MOTOR_TYPE.CTRE, 8, false, ENCODER_TYPE.REV, 21, false);
 
         /** CAN ID Properties **/
         public static final int GYRO_CAN_ID = 10;

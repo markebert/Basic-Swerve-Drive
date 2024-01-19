@@ -112,26 +112,28 @@ public class SwerveDrive implements RobotProperties {
         }
 
         // Swerve Direction Optimization
-        final double lfAngleDisplacement = Math.abs(Get_Gyro_Displacement(lfUnit.getSlewAngle(), lfAngle));
-        final double lrAngleDisplacement = Math.abs(Get_Gyro_Displacement(lrUnit.getSlewAngle(), lrAngle));
-        final double rfAngleDisplacement = Math.abs(Get_Gyro_Displacement(rfUnit.getSlewAngle(), rfAngle));
-        final double rrAngleDisplacement = Math.abs(Get_Gyro_Displacement(rrUnit.getSlewAngle(), rrAngle));
+        if (SWERVE_UNIT_ORIENTATION_OPTIMIZATION) {
+            final double lfAngleDisplacement = Math.abs(Get_Gyro_Displacement(lfUnit.getSlewAngle(), lfAngle));
+            final double lrAngleDisplacement = Math.abs(Get_Gyro_Displacement(lrUnit.getSlewAngle(), lrAngle));
+            final double rfAngleDisplacement = Math.abs(Get_Gyro_Displacement(rfUnit.getSlewAngle(), rfAngle));
+            final double rrAngleDisplacement = Math.abs(Get_Gyro_Displacement(rrUnit.getSlewAngle(), rrAngle));
 
-        if (lfAngleDisplacement > 90) {
-            lfAngle = Normalize_Gryo_Value(lfAngle + 180);
-            lfMagnitude = -lfMagnitude;
-        }
-        if (lrAngleDisplacement > 90) {
-            lrAngle = Normalize_Gryo_Value(lrAngle + 180);
-            lrMagnitude = -lrMagnitude;
-        }
-        if (rfAngleDisplacement > 90) {
-            rfAngle = Normalize_Gryo_Value(rfAngle + 180);
-            rfMagnitude = -rfMagnitude;
-        }
-        if (rrAngleDisplacement > 90) {
-            rrAngle = Normalize_Gryo_Value(rrAngle + 180);
-            rrMagnitude = -rrMagnitude;
+            if (lfAngleDisplacement > 90) {
+                lfAngle = Normalize_Gryo_Value(lfAngle + 180);
+                lfMagnitude = -lfMagnitude;
+            }
+            if (lrAngleDisplacement > 90) {
+                lrAngle = Normalize_Gryo_Value(lrAngle + 180);
+                lrMagnitude = -lrMagnitude;
+            }
+            if (rfAngleDisplacement > 90) {
+                rfAngle = Normalize_Gryo_Value(rfAngle + 180);
+                rfMagnitude = -rfMagnitude;
+            }
+            if (rrAngleDisplacement > 90) {
+                rrAngle = Normalize_Gryo_Value(rrAngle + 180);
+                rrMagnitude = -rrMagnitude;
+            }
         }
 
         // Updates the slew motor angles

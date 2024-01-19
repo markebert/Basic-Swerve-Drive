@@ -12,6 +12,7 @@ import com.ctre.phoenix6.hardware.CANcoder;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.AbsoluteSensorRangeValue;
 import com.ctre.phoenix6.signals.NeutralModeValue;
+import com.ctre.phoenix6.signals.SensorDirectionValue;
 import com.ctre.phoenix6.configs.CANcoderConfiguration;
 
 // REV Imports
@@ -92,6 +93,9 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
                 absoluteEncoder = new CANcoder(swerveUnitConfig.getABSOLUTE_ENCODER_CAN_ID(), swerveUnitConfig.getCANBUS());
                 CANcoderConfiguration absoluteEncoderConfiguration = new CANcoderConfiguration();
                 absoluteEncoderConfiguration.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                absoluteEncoderConfiguration.MagnetSensor.SensorDirection = swerveUnitConfig.isABSOLUTE_ENCODER_INVERTED()
+                        ? SensorDirectionValue.Clockwise_Positive
+                        : SensorDirectionValue.CounterClockwise_Positive;
                 absoluteEncoder.getConfigurator().apply(absoluteEncoderConfiguration);
                 break;
             default:
@@ -283,7 +287,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // Get the absolute encoder value based on encoder type
         switch (selectedEncoderType) {
             case CTRE:
-                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * -360.0;
+                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
                 break;
             default:
                 // Assumes the encoder is wired into the slew motor spark max
