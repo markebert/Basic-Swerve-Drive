@@ -57,6 +57,7 @@ public class SwerveDrive implements RobotProperties {
             });
         } catch (IOException ex) {
             // Do Nothing
+            System.out.println("Could not start any PID logging.");
             // ex.printStackTrace();
         }
 
