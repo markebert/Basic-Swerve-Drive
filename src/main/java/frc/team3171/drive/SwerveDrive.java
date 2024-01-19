@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -32,22 +33,31 @@ public class SwerveDrive implements RobotProperties {
     private volatile double lrAngle = 0, lfAngle = 0, rfAngle = 0, rrAngle = 0;
 
     // PID Data Logger
-    private UDPClient udpClient;
+    private List<UDPClient> udpClients;
 
     public SwerveDrive(final SwerveUnitConfig lrUnitConfig, final SwerveUnitConfig lfUnitConfig, final SwerveUnitConfig rfUnitConfig,
             final SwerveUnitConfig rrUnitConfig) {
+        // Init Swerve Units
         this.lrUnit = new SwerveUnit(lrUnitConfig);
         this.lfUnit = new SwerveUnit(lfUnitConfig);
         this.rfUnit = new SwerveUnit(rfUnitConfig);
         this.rrUnit = new SwerveUnit(rrUnitConfig);
 
+        // Setup PID logging, if enabled in swerve unit config
         try {
-            udpClient = new UDPClient(rfUnit.getSlewPIDData(), "10.31.71.201", 5801);
-            udpClient.start();
+            udpClients.add(new UDPClient(lrUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5801));
+            udpClients.add(new UDPClient(lfUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5802));
+            udpClients.add(new UDPClient(rfUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5803));
+            udpClients.add(new UDPClient(rrUnit.getSlewPIDData(), PID_LOG_ADDRESS, 5804));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
 
+        udpClients.forEach(client -> {
+            client.start();
+        });
+
+        // Load the save slew calibrations
         loadSlewCalibration();
     }
 
