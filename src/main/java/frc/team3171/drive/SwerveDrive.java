@@ -143,10 +143,10 @@ public class SwerveDrive implements RobotProperties {
         rrUnit.updateSlewAngle(rrAngle);
 
         // Set the drive motor speeds
-        lrUnit.setDriveSpeed(lrMagnitude);
-        lfUnit.setDriveSpeed(lfMagnitude);
-        rfUnit.setDriveSpeed(rfMagnitude);
-        rrUnit.setDriveSpeed(rrMagnitude);
+        lrUnit.setDriveSpeed(SWERVE_DIRECTION_DEBUG ? 0 : lrMagnitude);
+        lfUnit.setDriveSpeed(SWERVE_DIRECTION_DEBUG ? 0 : lfMagnitude);
+        rfUnit.setDriveSpeed(SWERVE_DIRECTION_DEBUG ? 0 : rfMagnitude);
+        rrUnit.setDriveSpeed(SWERVE_DIRECTION_DEBUG ? 0 : rrMagnitude);
     }
 
     public void disable() {

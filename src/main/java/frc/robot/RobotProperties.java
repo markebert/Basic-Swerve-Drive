@@ -12,6 +12,7 @@ public interface RobotProperties {
 
         /** Debug Info **/
         public static final boolean DEBUG = true;
+        public static final boolean SWERVE_DIRECTION_DEBUG = false;
         public static final String PID_LOG_ADDRESS = "10.31.71.201";
 
         /** Drive Variables **/
