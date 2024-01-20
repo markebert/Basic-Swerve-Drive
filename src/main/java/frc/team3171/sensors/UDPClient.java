@@ -13,6 +13,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -22,9 +23,10 @@ import java.util.concurrent.TimeUnit;
  */
 public class UDPClient implements Runnable {
 
+    private static final ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+    private Future<?> future;
     private final ConcurrentLinkedQueue<String> MESSAGE_BUFFER;
     private final DatagramSocket OUTGOING_SOCKET;
-    private final ScheduledExecutorService es;
     private final InetAddress IP_ADDRESS;
     private final int PORT;
 
@@ -34,7 +36,6 @@ public class UDPClient implements Runnable {
         this.IP_ADDRESS = InetAddress.getByName(IP_ADDRESS);
         this.PORT = PORT;
         this.OUTGOING_SOCKET = new DatagramSocket();
-        this.es = Executors.newSingleThreadScheduledExecutor();
     }
 
     @Override
@@ -59,8 +60,8 @@ public class UDPClient implements Runnable {
     }
 
     public void start(final int updateRate) {
-        if (MESSAGE_BUFFER != null) {
-            es.scheduleAtFixedRate(this, 0, updateRate, TimeUnit.MILLISECONDS);
+        if (MESSAGE_BUFFER != null && future == null) {
+            future = executor.scheduleAtFixedRate(this, 0, updateRate, TimeUnit.MILLISECONDS);
         }
     }
 
@@ -71,15 +72,15 @@ public class UDPClient implements Runnable {
     public void close() {
         try {
             OUTGOING_SOCKET.close();
-            es.shutdown();
-            es.awaitTermination(1000, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            es.shutdownNow();
+            future.cancel(true);
+            future.wait(1000);
+        } catch (InterruptedException ex) {
+            System.err.println(ex.getMessage());
         }
     }
 
     public boolean isAlive() {
-        return !(es.isShutdown() || es.isTerminated());
+        return !(future.isCancelled() || OUTGOING_SOCKET.isClosed());
     }
 
 }
