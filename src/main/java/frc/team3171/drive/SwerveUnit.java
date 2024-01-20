@@ -92,10 +92,10 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
             case CTRE:
                 absoluteEncoder = new CANcoder(swerveUnitConfig.getAbsoluteEncoderCANID(), swerveUnitConfig.getCANBUS());
                 CANcoderConfiguration absoluteEncoderConfiguration = new CANcoderConfiguration();
-                absoluteEncoderConfiguration.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
+                absoluteEncoderConfiguration.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Unsigned_0To1;
                 absoluteEncoderConfiguration.MagnetSensor.SensorDirection = swerveUnitConfig.isAbsoluteEncoderInverted()
-                        ? SensorDirectionValue.Clockwise_Positive
-                        : SensorDirectionValue.CounterClockwise_Positive;
+                        ? SensorDirectionValue.CounterClockwise_Positive
+                        : SensorDirectionValue.Clockwise_Positive;
                 absoluteEncoder.getConfigurator().apply(absoluteEncoderConfiguration);
                 break;
             default:
@@ -287,7 +287,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // Get the absolute encoder value based on encoder type
         switch (selectedEncoderType) {
             case CTRE:
-                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+                mappedEncoderAngle = HelperFunctions.Map(absoluteEncoder.getAbsolutePosition().getValueAsDouble(), 0, 1, 0, 360);
                 break;
             default:
                 // Assumes the encoder is wired into the slew motor spark max
@@ -373,7 +373,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         // Get the absolute encoder value based on encoder type
         switch (selectedEncoderType) {
             case CTRE:
-                mappedEncoderAngle = absoluteEncoder.getAbsolutePosition().getValueAsDouble() * 360.0;
+                mappedEncoderAngle = HelperFunctions.Map(absoluteEncoder.getAbsolutePosition().getValueAsDouble(), 0, 1, 0, 360);
                 break;
             default:
                 // Assumes the encoder is wired into the slew motor spark max
