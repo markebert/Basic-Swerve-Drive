@@ -17,7 +17,7 @@ public interface RobotProperties {
         public static final String PID_LOG_ADDRESS = "10.31.71.201";
 
         /** Drive Variables **/
-        public static final boolean FIELD_ORIENTED_SWERVE = false;
+        public static final boolean FIELD_ORIENTED_SWERVE = true;
         public static final double JOYSTICK_DEADZONE = .08;
         public static final double MAX_DRIVE_SPEED = .5, MAX_ROTATION_SPEED = .6;
         public static final boolean PINWHEEL_ZERO_ORIENTATION = false;
@@ -34,7 +34,8 @@ public interface RobotProperties {
                         .setAbsoluteEncoderCANID(21).setCANBUS("canivore").setSlewMotorInverted(false).build();
 
         /** CAN ID Properties **/
-        public static final int GYRO_CAN_ID = 22;
+        public static final int GYRO_CAN_ID = 25;
+        public static final String GYRO_CAN_BUS = "canivore";
 
         /** PID Properties **/
         public static final double GYRO_KP = .013, GYRO_KI = .00075, GYRO_KD = .00075, GYRO_MIN = -.5, GYRO_MAX = .5;

@@ -69,7 +69,7 @@ public class Robot extends TimedRobot implements RobotProperties {
     swerveDrive = new SwerveDrive(lr_Unit_Config, lf_Unit_Config, rf_Unit_Config, rr_Unit_Config);
 
     // Sensors
-    gyro = new Pigeon2Wrapper(GYRO_CAN_ID);
+    gyro = new Pigeon2Wrapper(GYRO_CAN_ID, GYRO_CAN_BUS);
     gyro.reset();
 
     // PID Controllers
