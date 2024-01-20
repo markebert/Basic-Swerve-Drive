@@ -57,43 +57,43 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
      */
     public SwerveUnit(final SwerveUnitConfig swerveUnitConfig) {
         // Init the drive motor
-        driveMotorType = swerveUnitConfig.getDRIVE_MOTOR_TYPE();
+        driveMotorType = swerveUnitConfig.getDriveMotorType();
         switch (driveMotorType) {
             case CTRE:
-                driveMotor = new TalonFX(swerveUnitConfig.getDRIVE_MOTOR_CAN_ID(), swerveUnitConfig.getCANBUS());
-                ((TalonFX) driveMotor).setInverted(swerveUnitConfig.isDRIVE_MOTOR_INVERTED());
+                driveMotor = new TalonFX(swerveUnitConfig.getDriveMotorCANID(), swerveUnitConfig.getCANBUS());
+                ((TalonFX) driveMotor).setInverted(swerveUnitConfig.isDriveMotorInverted());
                 ((TalonFX) driveMotor).setNeutralMode(NeutralModeValue.Brake);
                 break;
             default:
-                driveMotor = new CANSparkMax(swerveUnitConfig.getDRIVE_MOTOR_CAN_ID(), MotorType.kBrushless);
-                ((CANSparkMax) driveMotor).setInverted(swerveUnitConfig.isDRIVE_MOTOR_INVERTED());
+                driveMotor = new CANSparkMax(swerveUnitConfig.getDriveMotorCANID(), MotorType.kBrushless);
+                ((CANSparkMax) driveMotor).setInverted(swerveUnitConfig.isDriveMotorInverted());
                 ((CANSparkMax) driveMotor).setIdleMode(IdleMode.kBrake);
                 break;
         }
 
         // Init the slew motor
-        slewMotorType = swerveUnitConfig.getSLEW_MOTOR_TYPE();
+        slewMotorType = swerveUnitConfig.getSlewMotorType();
         switch (slewMotorType) {
             case CTRE:
-                slewMotor = new TalonFX(swerveUnitConfig.getSLEW_MOTOR_CAN_ID(), swerveUnitConfig.getCANBUS());
-                ((TalonFX) slewMotor).setInverted(swerveUnitConfig.isSLEW_MOTOR_INVERTED());
+                slewMotor = new TalonFX(swerveUnitConfig.getSlewMotorCANID(), swerveUnitConfig.getCANBUS());
+                ((TalonFX) slewMotor).setInverted(swerveUnitConfig.isSlewMotorInverted());
                 ((TalonFX) slewMotor).setNeutralMode(NeutralModeValue.Brake);
                 break;
             default:
-                slewMotor = new CANSparkMax(swerveUnitConfig.getSLEW_MOTOR_CAN_ID(), MotorType.kBrushless);
-                ((CANSparkMax) slewMotor).setInverted(swerveUnitConfig.isSLEW_MOTOR_INVERTED());
+                slewMotor = new CANSparkMax(swerveUnitConfig.getSlewMotorCANID(), MotorType.kBrushless);
+                ((CANSparkMax) slewMotor).setInverted(swerveUnitConfig.isSlewMotorInverted());
                 ((CANSparkMax) slewMotor).setIdleMode(IdleMode.kBrake);
                 break;
         }
 
         // Init the absolute position encoder used for the slew angle
-        selectedEncoderType = swerveUnitConfig.getABSOLUTE_ENCODER_TYPE();
+        selectedEncoderType = swerveUnitConfig.getAbsoluteEncoderType();
         switch (selectedEncoderType) {
             case CTRE:
-                absoluteEncoder = new CANcoder(swerveUnitConfig.getABSOLUTE_ENCODER_CAN_ID(), swerveUnitConfig.getCANBUS());
+                absoluteEncoder = new CANcoder(swerveUnitConfig.getAbsoluteEncoderCANID(), swerveUnitConfig.getCANBUS());
                 CANcoderConfiguration absoluteEncoderConfiguration = new CANcoderConfiguration();
                 absoluteEncoderConfiguration.MagnetSensor.AbsoluteSensorRange = AbsoluteSensorRangeValue.Signed_PlusMinusHalf;
-                absoluteEncoderConfiguration.MagnetSensor.SensorDirection = swerveUnitConfig.isABSOLUTE_ENCODER_INVERTED()
+                absoluteEncoderConfiguration.MagnetSensor.SensorDirection = swerveUnitConfig.isAbsoluteEncoderInverted()
                         ? SensorDirectionValue.Clockwise_Positive
                         : SensorDirectionValue.CounterClockwise_Positive;
                 absoluteEncoder.getConfigurator().apply(absoluteEncoderConfiguration);
@@ -105,7 +105,7 @@ public class SwerveUnit implements DoubleSupplier, RobotProperties {
         }
 
         // Init the queue for pid data, if enabled
-        slewPIDData = swerveUnitConfig.getLOG_PID_DATA() ? new ConcurrentLinkedQueue<String>() : null;
+        slewPIDData = swerveUnitConfig.isLogPIDData() ? new ConcurrentLinkedQueue<String>() : null;
 
         // Init the gyro PID controller
         slewPIDController = new ThreadedPIDController(this::getAsDouble, SLEW_KP, SLEW_KI, SLEW_KD, SLEW_PID_MIN, SLEW_PID_MAX, true);
