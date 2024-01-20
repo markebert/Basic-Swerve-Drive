@@ -27,7 +27,7 @@ public interface RobotProperties {
         public static final SwerveUnitConfig lf_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.CTRE, 12, MOTOR_TYPE.CTRE, 13, ENCODER_TYPE.CTRE)
                         .setAbsoluteEncoderCANID(19).setCANBUS("canivore").setSlewMotorInverted(false).build();
         public static final SwerveUnitConfig lr_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.CTRE, 10, MOTOR_TYPE.CTRE, 11, ENCODER_TYPE.CTRE)
-                        .setAbsoluteEncoderCANID(18).setCANBUS("canivore").setSlewMotorInverted(false).setLogPIDData(true).build();
+                        .setAbsoluteEncoderCANID(18).setCANBUS("canivore").setSlewMotorInverted(false).build();
         public static final SwerveUnitConfig rf_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.CTRE, 14, MOTOR_TYPE.CTRE, 15, ENCODER_TYPE.CTRE)
                         .setAbsoluteEncoderCANID(20).setCANBUS("canivore").setSlewMotorInverted(false).build();
         public static final SwerveUnitConfig rr_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.CTRE, 16, MOTOR_TYPE.CTRE, 17, ENCODER_TYPE.CTRE)
