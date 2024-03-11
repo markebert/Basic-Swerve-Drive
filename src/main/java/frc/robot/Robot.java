@@ -7,6 +7,8 @@ package frc.robot;
 // Java Imports
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 // FRC Imports
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -16,18 +18,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.team3171.drive.SwerveDrive;
-import frc.team3171.sensors.Pigeon2Wrapper;
-import frc.team3171.sensors.ThreadedPIDController;
 import frc.team3171.HelperFunctions;
 import frc.team3171.auton.AutonRecorder;
 import frc.team3171.auton.AutonRecorderData;
 import frc.team3171.auton.XboxControllerState;
+import frc.team3171.controllers.ThreadedPIDController;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 
 /**
- * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as
- * described in the TimedRobot documentation. If you change the name of this class or the package after creating this
- * project, you must also update the build.gradle file in the project.
+ * The VM is configured to automatically run this class, and to call the functions corresponding to each mode, as described in the TimedRobot documentation. If you change the name of this class or the
+ * package after creating this project, you must also update the build.gradle file in the project.
  */
 public class Robot extends TimedRobot implements RobotProperties {
 
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot implements RobotProperties {
 
   // Drive Objects
   private SwerveDrive swerveDrive;
-  private Pigeon2Wrapper gyro;
+  private Pigeon2 gyro;
   private ThreadedPIDController gyroPIDController;
 
   // Auton Recorder
@@ -55,7 +55,7 @@ public class Robot extends TimedRobot implements RobotProperties {
   private SendableChooser<String> autonModeChooser;
 
   // Global Variables
-  private boolean fieldOrientationChosen;
+  private volatile boolean fieldOrientationFlipped;
 
   // Edge Triggers
   private boolean zeroEdgeTrigger;
@@ -69,11 +69,13 @@ public class Robot extends TimedRobot implements RobotProperties {
     swerveDrive = new SwerveDrive(lr_Unit_Config, lf_Unit_Config, rf_Unit_Config, rr_Unit_Config);
 
     // Sensors
-    gyro = new Pigeon2Wrapper(GYRO_CAN_ID);
+    gyro = new Pigeon2(GYRO_CAN_ID);
     gyro.reset();
 
     // PID Controllers
-    gyroPIDController = new ThreadedPIDController(gyro.asSupplier(), GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX, true);
+    gyroPIDController = new ThreadedPIDController(() -> Normalize_Gryo_Value(gyro.getAngle() + (fieldOrientationFlipped ? 180 : 0)), GYRO_KP, GYRO_KI, GYRO_KD, GYRO_MIN, GYRO_MAX, false);
+    gyroPIDController.setMinSensorValue(-180);
+    gyroPIDController.setMaxSensorValue(180);
     gyroPIDController.start();
 
     // Auton Recorder init
@@ -91,7 +93,7 @@ public class Robot extends TimedRobot implements RobotProperties {
 
     // Field Orientation Chooser
     fieldOrientationChooser = new SendableChooser<>();
-    fieldOrientationChooser.setDefaultOption("Pick an option", null);
+    fieldOrientationChooser.setDefaultOption("Pick an option", false);
     fieldOrientationChooser.addOption("0\u00B0", false);
     fieldOrientationChooser.addOption("180\u00B0", true);
     SmartDashboard.putData("Field Orientation Chooser", fieldOrientationChooser);
@@ -107,7 +109,7 @@ public class Robot extends TimedRobot implements RobotProperties {
     SmartDashboard.putData("Auton Modes", autonModeChooser);
 
     // Global Variable Init
-    fieldOrientationChosen = false;
+    fieldOrientationFlipped = false;
 
     // Edge Trigger Init
     zeroEdgeTrigger = false;
@@ -119,20 +121,8 @@ public class Robot extends TimedRobot implements RobotProperties {
     final double gyroValue = gyroPIDController.getSensorValue();
 
     // Field Orientation Chooser
-    final Boolean fieldOrientationBoolean = fieldOrientationChooser.getSelected();
-    // Until a valid option is choosen leave the gyro orientation alone
-    if (fieldOrientationBoolean != null && !fieldOrientationChosen) {
-      // Prevents the field orientation from being changed until a reboot
-      fieldOrientationChosen = true;
-      // If the selected option is true then flip the orientation 180 degrees
-      if (fieldOrientationBoolean.booleanValue()) {
-        gyro.setYaw(Normalize_Gryo_Value(gyroValue + 180));
-        SmartDashboard.putBoolean("Flipped", true);
-      } else {
-        // Else don't flip the field orientation
-        SmartDashboard.putBoolean("Flipped", false);
-      }
-    }
+    fieldOrientationFlipped = fieldOrientationChooser.getSelected().booleanValue();
+    SmartDashboard.putBoolean("Flipped", fieldOrientationFlipped);
 
     // Driver Controller Info
     double leftStickX, leftStickY, rightStickX, leftStickAngle, leftStickMagnitude, fieldCorrectedAngle;
@@ -190,15 +180,15 @@ public class Robot extends TimedRobot implements RobotProperties {
       playbackData = null;
     } else {
       switch (selectedAutonMode) {
-        case DEFAULT_AUTON:
-          disabledInit();
-          playbackData = null;
-          break;
-        default:
-          AutonRecorder.loadFromFile(autonPlaybackQueue, selectedAutonMode);
-          playbackData = autonPlaybackQueue.poll();
-          robotControlsInit();
-          break;
+      case DEFAULT_AUTON:
+        disabledInit();
+        playbackData = null;
+        break;
+      default:
+        AutonRecorder.loadFromFile(autonPlaybackQueue, selectedAutonMode);
+        playbackData = autonPlaybackQueue.poll();
+        robotControlsInit();
+        break;
       }
     }
     // Update the autonStartTime
@@ -208,28 +198,28 @@ public class Robot extends TimedRobot implements RobotProperties {
   @Override
   public void autonomousPeriodic() {
     switch (selectedAutonMode) {
-      case DEFAULT_AUTON:
-        disabledPeriodic();
-        break;
-      default:
-        // Plays the recorded auton if theres a valid next step, otherwise disables
-        if (playbackData != null) {
-          // Get the controller states
-          final XboxControllerState driveControllerState = playbackData.getDriveControllerState();
-          final XboxControllerState operatorControllerState = playbackData.getOperatorControllerState();
+    case DEFAULT_AUTON:
+      disabledPeriodic();
+      break;
+    default:
+      // Plays the recorded auton if theres a valid next step, otherwise disables
+      if (playbackData != null) {
+        // Get the controller states
+        final XboxControllerState driveControllerState = playbackData.getDriveControllerState();
+        final XboxControllerState operatorControllerState = playbackData.getOperatorControllerState();
 
-          // Robot drive controls
-          robotControlsPeriodic(driveControllerState, operatorControllerState);
+        // Robot drive controls
+        robotControlsPeriodic(driveControllerState, operatorControllerState);
 
-          // Checks for new data and when to switch to it
-          if ((Timer.getFPGATimestamp() - autonStartTime) >= playbackData.getFPGATimestamp()) {
-            playbackData = autonPlaybackQueue.poll();
-          }
-        } else {
-          selectedAutonMode = DEFAULT_AUTON;
-          disabledInit();
+        // Checks for new data and when to switch to it
+        if ((Timer.getFPGATimestamp() - autonStartTime) >= playbackData.getFPGATimestamp()) {
+          playbackData = autonPlaybackQueue.poll();
         }
-        break;
+      } else {
+        selectedAutonMode = DEFAULT_AUTON;
+        disabledInit();
+      }
+      break;
     }
   }
 
@@ -261,13 +251,13 @@ public class Robot extends TimedRobot implements RobotProperties {
     final double autonTimeStamp = Timer.getFPGATimestamp() - autonStartTime;
     if (saveNewAuton && autonTimeStamp <= 15) {
       switch (selectedAutonMode) {
-        case DEFAULT_AUTON:
-          // Do Nothing
-          break;
-        default:
-          // Adds the recorded data to the auton recorder, but only if the data is new
-          autonRecorder.addNewData(new AutonRecorderData(autonTimeStamp, driveControllerState, operatorControllerState));
-          break;
+      case DEFAULT_AUTON:
+        // Do Nothing
+        break;
+      default:
+        // Adds the recorded data to the auton recorder, but only if the data is new
+        autonRecorder.addNewData(new AutonRecorderData(autonTimeStamp, driveControllerState, operatorControllerState));
+        break;
       }
     }
   }
@@ -282,12 +272,12 @@ public class Robot extends TimedRobot implements RobotProperties {
     if (saveNewAuton) {
       saveNewAuton = false;
       switch (selectedAutonMode) {
-        case DEFAULT_AUTON:
-          // Do Nothing
-          break;
-        default:
-          autonRecorder.saveToFile(selectedAutonMode);
-          break;
+      case DEFAULT_AUTON:
+        // Do Nothing
+        break;
+      default:
+        autonRecorder.saveToFile(selectedAutonMode);
+        break;
       }
     }
   }
