@@ -2,6 +2,7 @@ package frc.team3171.auton;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.XboxController;
+import frc.team3171.protos.XboxControllerState;
 
 /**
  * @author Mark Ebert
@@ -19,8 +20,8 @@ public class AutonRecorderData {
      */
     public AutonRecorderData() {
         this.fpgaTimestamp = 0;
-        this.driveControllerState = new XboxControllerState();
-        this.operatorControllerState = new XboxControllerState();
+        this.driveControllerState = XboxControllerState.newBuilder().build();
+        this.operatorControllerState = XboxControllerState.newBuilder().build();
     }
 
     /**
@@ -28,8 +29,30 @@ public class AutonRecorderData {
      */
     public AutonRecorderData(final double fpgaTimestamp, final XboxController driveController, final XboxController operatorController) {
         this.fpgaTimestamp = fpgaTimestamp;
-        this.driveControllerState = new XboxControllerState(driveController);
-        this.operatorControllerState = new XboxControllerState(operatorController);
+        this.driveControllerState = generateControllerState(driveController);
+        this.operatorControllerState = generateControllerState(operatorController);
+    }
+
+    private XboxControllerState generateControllerState(XboxController controller) {
+        var builder = XboxControllerState.newBuilder();
+        builder.setLeftX(controller.getLeftX());
+        builder.setLeftY(controller.getLeftY());
+        builder.setRightX(controller.getRightX());
+        builder.setRightY(controller.getRightY());
+        builder.setLeftTriggerAxis(controller.getLeftTriggerAxis());
+        builder.setRightTriggerAxis(controller.getRightTriggerAxis());
+        builder.setPov(controller.getPOV());
+        builder.setAButton(controller.getAButton());
+        builder.setBButton(controller.getBButton());
+        builder.setXButton(controller.getXButton());
+        builder.setYButton(controller.getYButton());
+        builder.setBackButton(controller.getBackButton());
+        builder.setStartButton(controller.getStartButton());
+        builder.setLeftBumper(controller.getLeftBumper());
+        builder.setRightBumper(controller.getRightBumper());
+        builder.setLeftStickButton(controller.getLeftStickButton());
+        builder.setRightStickButton(controller.getRightStickButton());
+        return builder.build();
     }
 
     /**
@@ -81,29 +104,20 @@ public class AutonRecorderData {
     }
 
     /**
-     * Checks if the provided new data is different from the current data, as long
-     * as the new data's timestamp is later then the current timestamp, if so
-     * returns true, otherwise false.
+     * Checks if the provided new data is different from the current data, as long as the new data's timestamp is later then the current timestamp, if so returns true, otherwise false.
      * 
-     * @param newData
-     *            The new set of data containing the new values to compare to
-     *            the current values.
+     * @param newData The new set of data containing the new values to compare to the current values.
      * @return Returns true if the new data is different, otherwise false.
      */
     public boolean isChanged(final AutonRecorderData newData) {
         if (newData.getFPGATimestamp() >= fpgaTimestamp) {
-            if (driveControllerState.isChanged(newData.getDriveControllerState())) {
-
-            } else if (operatorControllerState.isChanged(newData.getOperatorControllerState())) {
-
-            }
+            return !driveControllerState.equals(newData.getDriveControllerState()) || !operatorControllerState.equals(newData.getOperatorControllerState());
         }
         return false;
     }
 
     /**
-     * Returns the string representation of the data. Formatted as
-     * fpgaTimestamp,leftX,leftY,rightX,rightY;\n
+     * Returns the string representation of the data. Formatted as fpgaTimestamp,leftX,leftY,rightX,rightY;\n
      */
     @Override
     public String toString() {
@@ -125,8 +139,8 @@ public class AutonRecorderData {
                 if (data.length == 3) {
                     final AutonRecorderData autonData = new AutonRecorderData();
                     autonData.setFPGATimestamp(Double.parseDouble(data[0]));
-                    autonData.setDriveControllerState(XboxControllerState.fromString(data[1]));
-                    autonData.setOperatorControllerState(XboxControllerState.fromString(data[2]));
+                    // autonData.setDriveControllerState(XboxControllerState.parseFrom(data[1]));
+                    // autonData.setOperatorControllerState(XboxControllerState.fromString(data[2]));
                     return autonData;
                 }
             }

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package frc.team3171.protos;
+option java_multiple_files = true;
+
+message XboxControllerState {
+     optional double leftX = 1;
+     optional double leftY = 2;
+     optional double rightX = 3;
+     optional double rightY = 4;
+     optional double leftTriggerAxis = 5;
+     optional double rightTriggerAxis = 6;
+     optional int32 pov = 7;
+     optional bool aButton = 8;
+     optional bool bButton = 9;
+     optional bool xButton = 10;
+     optional bool yButton = 11;
+     optional bool startButton = 12;
+     optional bool backButton = 13;
+     optional bool leftBumper = 14;
+     optional bool rightBumper = 15;
+     optional bool leftStickButton = 16;
+     optional bool rightStickButton = 17;
+}

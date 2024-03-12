@@ -18,10 +18,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.team3171.drive.SwerveDrive;
+import frc.team3171.protos.XboxControllerState;
 import frc.team3171.HelperFunctions;
 import frc.team3171.auton.AutonRecorder;
 import frc.team3171.auton.AutonRecorderData;
-import frc.team3171.auton.XboxControllerState;
 import frc.team3171.controllers.ThreadedPIDController;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 
@@ -241,8 +241,8 @@ public class Robot extends TimedRobot implements RobotProperties {
   @Override
   public void teleopPeriodic() {
     // Get the controller states
-    final XboxControllerState driveControllerState = new XboxControllerState(driveController);
-    final XboxControllerState operatorControllerState = new XboxControllerState();
+    final XboxControllerState driveControllerState = null;
+    final XboxControllerState operatorControllerState = null;
 
     // Robot drive controls
     robotControlsPeriodic(driveControllerState, operatorControllerState);
@@ -336,8 +336,8 @@ public class Robot extends TimedRobot implements RobotProperties {
       gyroPIDController.enablePID();
 
       // Quick Turning
-      if (driveControllerState.getPOV() != -1) {
-        gyroPIDController.updateSensorLockValueWithoutReset(Normalize_Gryo_Value(driveControllerState.getPOV()));
+      if (driveControllerState.hasPov() && driveControllerState.getPov() != -1) {
+        gyroPIDController.updateSensorLockValueWithoutReset(Normalize_Gryo_Value(driveControllerState.getPov()));
       } else if (driveControllerState.getYButton()) {
         gyroPIDController.updateSensorLockValueWithoutReset(0);
       } else if (driveControllerState.getBButton()) {
