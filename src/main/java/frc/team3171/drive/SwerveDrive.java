@@ -1,23 +1,23 @@
 package frc.team3171.drive;
 
 // Java Imports
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.google.protobuf.CodedInputStream;
-
 // FRC Imports
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
-import frc.team3171.protos.SlewDrive.SlewCalibration;
-import frc.team3171.sensors.UDPClient;
+import frc.team3171.networking.UDPClient;
+import frc.team3171.protos.SlewDrive.SlewUnitConfiguration;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 import static frc.team3171.HelperFunctions.Add_Two_Vectors;
 import static frc.team3171.HelperFunctions.Return_Vector_With_Largest_Magnitude;
@@ -38,7 +38,7 @@ public class SwerveDrive implements RobotProperties {
     // PID Data Logger
     private List<UDPClient> udpClients;
 
-    public SwerveDrive(final SwerveUnitConfig lrUnitConfig, final SwerveUnitConfig lfUnitConfig, final SwerveUnitConfig rfUnitConfig, final SwerveUnitConfig rrUnitConfig) {
+    public SwerveDrive(SlewUnitConfiguration lrUnitConfig, SlewUnitConfiguration lfUnitConfig, SlewUnitConfiguration rfUnitConfig, SlewUnitConfiguration rrUnitConfig) {
         // Init Swerve Units
         this.lrUnit = new SwerveUnit(lrUnitConfig);
         this.lfUnit = new SwerveUnit(lfUnitConfig);
@@ -172,13 +172,11 @@ public class SwerveDrive implements RobotProperties {
             rfUnit.zeroModule();
             rrUnit.zeroModule();
         }
-
-        var slewCalibration = SlewCalibration.newBuilder();
-        slewCalibration.setLeftFrontSlewOffset(lfUnit.getSlewOffset());
-        slewCalibration.setLeftRearSlewOffset(lrUnit.getSlewOffset());
-        slewCalibration.setRightFrontSlewOffset(rfUnit.getSlewOffset());
-        slewCalibration.setRightRearSlewOffset(rrUnit.getSlewOffset());
-        saveSlewCalibration(slewCalibration.build());
+        final double lrSlewOffset = lrUnit.getSlewOffset();
+        final double lfSlewOffset = lfUnit.getSlewOffset();
+        final double rfSlewOffset = rfUnit.getSlewOffset();
+        final double rrSlewOffset = rrUnit.getSlewOffset();
+        saveSlewCalibration(String.format("%.4f,%.4f,%.4f,%.4f;\n", lrSlewOffset, lfSlewOffset, rfSlewOffset, rrSlewOffset));
     }
 
     /**
@@ -186,61 +184,75 @@ public class SwerveDrive implements RobotProperties {
      * 
      * @param autonFileName The path to the file to save the auton data to.
      */
-    public synchronized void saveSlewCalibration(final SlewCalibration slewCalibration) {
+    public synchronized void saveSlewCalibration(final String slewOffsets) {
         try {
-            // Check if the calibration file exists, if it does delete then file and recreate it
             File calibrationFile = new File(String.format("/home/lvuser/%s.txt", "slewcalibration"));
             if (calibrationFile.exists()) {
                 calibrationFile.delete();
             }
             calibrationFile.createNewFile();
-
-            // Create a buffered writer and write the contents of the slew calibration data
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(calibrationFile))) {
-                writer.write(slewCalibration.toString());
-                writer.flush();
-            }
+            BufferedWriter writer = new BufferedWriter(new FileWriter(calibrationFile));
+            writer.write(slewOffsets);
+            // Flush the data to the file
+            writer.flush();
+            writer.close();
             System.out.println("Calibration Successfully Saved!");
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
      * 
+     * @param autonFileName
+     * @return
      */
     public synchronized void loadSlewCalibration() {
-        try (FileInputStream autonFile = new FileInputStream(String.format("/home/lvuser/%s.txt", "slewcalibration"))) {
-            // Gets the saved auton file as a coded input stream
-            CodedInputStream inputStream = CodedInputStream.newInstance(autonFile);
-            // Parses the data from the stream into the respecitve protobuf object
-            SlewCalibration slewCalibration = SlewCalibration.parseFrom(inputStream);
-            lfUnit.setSlewOffset(slewCalibration.getLeftFrontSlewOffset());
-            lrUnit.setSlewOffset(slewCalibration.getLeftRearSlewOffset());
-            rfUnit.setSlewOffset(slewCalibration.getRightFrontSlewOffset());
-            rrUnit.setSlewOffset(slewCalibration.getRightRearSlewOffset());
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(String.format("/home/lvuser/%s.txt", "slewcalibration")));
+            String dataString = reader.readLine();
+
+            // Parse the string
+            dataString = dataString.trim();
+            if (dataString.endsWith(";")) {
+                dataString = dataString.substring(0, dataString.length() - 1);
+                final String[] data = dataString.split(",");
+                if (data.length == 4) {
+                    final double lrSlewOffset = Double.parseDouble(data[0]);
+                    final double lfSlewOffset = Double.parseDouble(data[1]);
+                    final double rfSlewOffset = Double.parseDouble(data[2]);
+                    final double rrSlewOffset = Double.parseDouble(data[3]);
+
+                    lrUnit.setSlewOffset(lrSlewOffset);
+                    lfUnit.setSlewOffset(lfSlewOffset);
+                    rfUnit.setSlewOffset(rfSlewOffset);
+                    rrUnit.setSlewOffset(rrSlewOffset);
+                }
+            }
+            reader.close();
             System.out.println("Calibration Successfully Loaded!");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.err.printf("The Calibration File %s.txt could not be found!\n", "slewcalibration");
         }
     }
 
-    public void SmartDashboard() {
-        // Update Shuffleboard
-        SmartDashboard.putString("LF Speed", String.format("%.2f", lfUnit.getDriveSpeed()));
-        SmartDashboard.putString("LR Speed", String.format("%.2f", lrUnit.getDriveSpeed()));
-        SmartDashboard.putString("RF Speed", String.format("%.2f", rfUnit.getDriveSpeed()));
-        SmartDashboard.putString("RR Speed", String.format("%.2f", rrUnit.getDriveSpeed()));
+    public void shuffleboardInit(final String tabName) {
+        ShuffleboardTab swerveTab = Shuffleboard.getTab(tabName);
 
-        SmartDashboard.putString("LF Position", String.format("%.2f", lfUnit.getIntegratedEncoderValue()));
-        SmartDashboard.putString("LR Position", String.format("%.2f", lrUnit.getIntegratedEncoderValue()));
-        SmartDashboard.putString("RF Position", String.format("%.2f", rfUnit.getIntegratedEncoderValue()));
-        SmartDashboard.putString("RR Position", String.format("%.2f", rrUnit.getIntegratedEncoderValue()));
+        swerveTab.addString("LF Speed:", () -> String.format("%.2f", lfUnit.getDriveSpeed()));
+        swerveTab.addString("LR Speed:", () -> String.format("%.2f", lrUnit.getDriveSpeed()));
+        swerveTab.addString("RF Speed:", () -> String.format("%.2f", rfUnit.getDriveSpeed()));
+        swerveTab.addString("RR Speed:", () -> String.format("%.2f", rrUnit.getDriveSpeed()));
 
-        SmartDashboard.putString("LR Slew Angle", String.format("%.2f | %.2f", lrUnit.getSlewAngle(), lrUnit.getSlewTargetAngle()));
-        SmartDashboard.putString("LF Slew Angle", String.format("%.2f | %.2f", lfUnit.getSlewAngle(), lfUnit.getSlewTargetAngle()));
-        SmartDashboard.putString("RF Slew Angle", String.format("%.2f | %.2f", rfUnit.getSlewAngle(), rfUnit.getSlewTargetAngle()));
-        SmartDashboard.putString("RR Slew Angle", String.format("%.2f | %.2f", rrUnit.getSlewAngle(), rrUnit.getSlewTargetAngle()));
+        swerveTab.addString("LF Position:", () -> String.format("%.2f", lfUnit.getIntegratedEncoderValue()));
+        swerveTab.addString("LR Position:", () -> String.format("%.2f", lrUnit.getIntegratedEncoderValue()));
+        swerveTab.addString("RF Position:", () -> String.format("%.2f", rfUnit.getIntegratedEncoderValue()));
+        swerveTab.addString("RR Position:", () -> String.format("%.2f", rrUnit.getIntegratedEncoderValue()));
+
+        swerveTab.addString("LF Slew Angle:", () -> String.format("%.2f | %.2f", lfUnit.getSlewAngle(), lfUnit.getSlewTargetAngle()));
+        swerveTab.addString("LR Slew Angle:", () -> String.format("%.2f | %.2f", lrUnit.getSlewAngle(), lrUnit.getSlewTargetAngle()));
+        swerveTab.addString("RF Slew Angle:", () -> String.format("%.2f | %.2f", rfUnit.getSlewAngle(), rfUnit.getSlewTargetAngle()));
+        swerveTab.addString("RR Slew Angle:", () -> String.format("%.2f | %.2f", rrUnit.getSlewAngle(), rrUnit.getSlewTargetAngle()));
     }
 
 }

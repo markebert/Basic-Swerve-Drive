@@ -15,6 +15,9 @@ import com.ctre.phoenix6.hardware.Pigeon2;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -117,53 +120,30 @@ public class Robot extends TimedRobot implements RobotProperties {
 
     // Edge Trigger Init
     zeroEdgeTrigger = false;
+
+    shuffleboardInit();
+  }
+
+  private void shuffleboardInit() {
+    ShuffleboardTab periodicTab = Shuffleboard.getTab("Periodic");
+
+    // Auton Selectors
+    periodicTab.add("Auton Type", autonTypeChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
+    periodicTab.add("Auton Modes", autonModeChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
+    periodicTab.add("Field Orientation Chooser", fieldOrientationChooser).withWidget(BuiltInWidgets.kComboBoxChooser);
+    periodicTab.addBoolean("Flipped", () -> fieldOrientationFlipped);
+
+    // Put the values on Shuffleboard
+    periodicTab.addString("Gyro", () -> String.format("%.2f\u00B0 | %.2f\u00B0", gyroPIDController.getSensorValue(), gyroPIDController.getSensorLockValue()));
+
+    // Controller Values
+    swerveDrive.shuffleboardInit("Swerve Debug");
   }
 
   @Override
   public void robotPeriodic() {
-    // Gyro Value
-    final double gyroValue = gyroPIDController.getSensorValue();
-
     // Field Orientation Chooser
     fieldOrientationFlipped = fieldOrientationChooser.getSelected().booleanValue();
-    SmartDashboard.putBoolean("Flipped", fieldOrientationFlipped);
-
-    // Driver Controller Info
-    double leftStickX, leftStickY, rightStickX, leftStickAngle, leftStickMagnitude, fieldCorrectedAngle;
-    if (driveController.isConnected()) {
-      // Get the controller values
-      leftStickX = HelperFunctions.Deadzone_With_Map(JOYSTICK_DEADZONE, driveController.getLeftX());
-      leftStickY = HelperFunctions.Deadzone_With_Map(JOYSTICK_DEADZONE, -driveController.getLeftY());
-      rightStickX = HelperFunctions.Deadzone_With_Map(JOYSTICK_DEADZONE, driveController.getRightX(), -MAX_ROTATION_SPEED, MAX_ROTATION_SPEED);
-
-      // Calculate the left stick angle and magnitude
-      leftStickAngle = Normalize_Gryo_Value(Math.toDegrees(Math.atan2(leftStickX, leftStickY)));
-      leftStickMagnitude = Math.sqrt(Math.pow(leftStickX, 2) + Math.pow(leftStickY, 2));
-      if (leftStickMagnitude > 1.0) {
-        leftStickMagnitude = 1;
-      }
-
-      fieldCorrectedAngle = Normalize_Gryo_Value(leftStickAngle - gyroValue);
-    } else {
-      leftStickX = 0;
-      leftStickY = 0;
-      leftStickAngle = 0;
-      leftStickMagnitude = 0;
-      rightStickX = 0;
-      fieldCorrectedAngle = 0;
-    }
-
-    // Put the values on Shuffleboard
-    SmartDashboard.putString("Gyro", String.format("%.2f\u00B0", gyroValue));
-    if (DEBUG) {
-      // Operator Controller Values
-      SmartDashboard.putString("Left Stick Y", String.format("%.2f", leftStickY));
-      SmartDashboard.putString("Right Stick X", String.format("%.2f", rightStickX));
-      SmartDashboard.putString("Left Stick Angle", String.format("%.2f\u00B0", leftStickAngle));
-      SmartDashboard.putString("Left Stick Velocity", String.format("%.2f", leftStickMagnitude));
-      SmartDashboard.putString("Field Adjusted Angle", String.format("%.2f\u00B0", fieldCorrectedAngle));
-      swerveDrive.SmartDashboard();
-    }
 
     // Calibrate Swerve Drive
     final boolean zeroTrigger = driveController.getBackButton() && driveController.getStartButton() && isDisabled();

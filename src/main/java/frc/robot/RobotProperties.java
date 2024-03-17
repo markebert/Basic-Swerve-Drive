@@ -1,10 +1,9 @@
 package frc.robot;
 
 // Team 3171 Imports
-import frc.team3171.drive.SwerveUnitConfig;
-import frc.team3171.drive.SwerveUnitConfig.ENCODER_TYPE;
-import frc.team3171.drive.SwerveUnitConfig.MOTOR_TYPE;
-import frc.team3171.drive.SwerveUnitConfig.SwerveUnitConfigBuilder;
+import frc.team3171.protos.SlewDrive.Encoder_Type;
+import frc.team3171.protos.SlewDrive.Motor_Type;
+import frc.team3171.protos.SlewDrive.SlewUnitConfiguration;
 
 /**
  * @author Mark Ebert
@@ -24,10 +23,14 @@ public interface RobotProperties {
         public static final boolean SWERVE_UNIT_ORIENTATION_OPTIMIZATION = true;
 
         /** Swerve Unit Configuration **/
-        public static final SwerveUnitConfig lf_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.REV, 2, MOTOR_TYPE.REV, 3, ENCODER_TYPE.REV).build();
-        public static final SwerveUnitConfig lr_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.REV, 4, MOTOR_TYPE.REV, 5, ENCODER_TYPE.REV).build();
-        public static final SwerveUnitConfig rf_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.REV, 6, MOTOR_TYPE.REV, 7, ENCODER_TYPE.REV).build();
-        public static final SwerveUnitConfig rr_Unit_Config = new SwerveUnitConfigBuilder(MOTOR_TYPE.REV, 8, MOTOR_TYPE.REV, 9, ENCODER_TYPE.REV).build();
+        public static final SlewUnitConfiguration lf_Unit_Config = SlewUnitConfiguration.newBuilder().setDriveMotorType(Motor_Type.CTRE_FALCON).setDriveMotorID(2)
+                        .setSlewMotorType(Motor_Type.CTRE_FALCON).setSlewMotorID(3).setAbsoluteEncoderType(Encoder_Type.CTRE_CANCODER).setAbsoluteEncoderID(10).build();
+        public static final SlewUnitConfiguration lr_Unit_Config = SlewUnitConfiguration.newBuilder().setDriveMotorType(Motor_Type.CTRE_FALCON).setDriveMotorID(4)
+                        .setSlewMotorType(Motor_Type.CTRE_FALCON).setSlewMotorID(5).setAbsoluteEncoderType(Encoder_Type.CTRE_CANCODER).setAbsoluteEncoderID(11).build();
+        public static final SlewUnitConfiguration rf_Unit_Config = SlewUnitConfiguration.newBuilder().setDriveMotorType(Motor_Type.CTRE_FALCON).setDriveMotorID(6)
+                        .setSlewMotorType(Motor_Type.CTRE_FALCON).setSlewMotorID(7).setAbsoluteEncoderType(Encoder_Type.CTRE_CANCODER).setAbsoluteEncoderID(12).build();
+        public static final SlewUnitConfiguration rr_Unit_Config = SlewUnitConfiguration.newBuilder().setDriveMotorType(Motor_Type.CTRE_FALCON).setDriveMotorID(8)
+                        .setSlewMotorType(Motor_Type.CTRE_FALCON).setSlewMotorID(9).setAbsoluteEncoderType(Encoder_Type.CTRE_CANCODER).setAbsoluteEncoderID(13).build();
 
         /** CAN ID Properties **/
         public static final int GYRO_CAN_ID = 10;

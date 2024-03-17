@@ -15,6 +15,231 @@ public final class SlewDrive {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  /**
+   * Protobuf enum {@code frc.team3171.protos.Motor_Type}
+   */
+  public enum Motor_Type
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CTRE_FALCON = 0;</code>
+     */
+    CTRE_FALCON(0),
+    /**
+     * <code>REV_SPARK_MAX = 1;</code>
+     */
+    REV_SPARK_MAX(1),
+    /**
+     * <code>REV_SPARK_FLEX = 2;</code>
+     */
+    REV_SPARK_FLEX(2),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>CTRE_FALCON = 0;</code>
+     */
+    public static final int CTRE_FALCON_VALUE = 0;
+    /**
+     * <code>REV_SPARK_MAX = 1;</code>
+     */
+    public static final int REV_SPARK_MAX_VALUE = 1;
+    /**
+     * <code>REV_SPARK_FLEX = 2;</code>
+     */
+    public static final int REV_SPARK_FLEX_VALUE = 2;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Motor_Type valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static Motor_Type forNumber(int value) {
+      switch (value) {
+        case 0: return CTRE_FALCON;
+        case 1: return REV_SPARK_MAX;
+        case 2: return REV_SPARK_FLEX;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Motor_Type>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Motor_Type> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Motor_Type>() {
+            public Motor_Type findValueByNumber(int number) {
+              return Motor_Type.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return frc.team3171.protos.SlewDrive.getDescriptor().getEnumTypes().get(0);
+    }
+
+    private static final Motor_Type[] VALUES = values();
+
+    public static Motor_Type valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Motor_Type(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:frc.team3171.protos.Motor_Type)
+  }
+
+  /**
+   * Protobuf enum {@code frc.team3171.protos.Encoder_Type}
+   */
+  public enum Encoder_Type
+      implements com.google.protobuf.ProtocolMessageEnum {
+    /**
+     * <code>CTRE_CANCODER = 0;</code>
+     */
+    CTRE_CANCODER(0),
+    /**
+     * <code>REV_THROUGH_BORE = 1;</code>
+     */
+    REV_THROUGH_BORE(1),
+    UNRECOGNIZED(-1),
+    ;
+
+    /**
+     * <code>CTRE_CANCODER = 0;</code>
+     */
+    public static final int CTRE_CANCODER_VALUE = 0;
+    /**
+     * <code>REV_THROUGH_BORE = 1;</code>
+     */
+    public static final int REV_THROUGH_BORE_VALUE = 1;
+
+
+    public final int getNumber() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalArgumentException(
+            "Can't get the number of an unknown enum value.");
+      }
+      return value;
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     * @deprecated Use {@link #forNumber(int)} instead.
+     */
+    @java.lang.Deprecated
+    public static Encoder_Type valueOf(int value) {
+      return forNumber(value);
+    }
+
+    /**
+     * @param value The numeric wire value of the corresponding enum entry.
+     * @return The enum associated with the given numeric wire value.
+     */
+    public static Encoder_Type forNumber(int value) {
+      switch (value) {
+        case 0: return CTRE_CANCODER;
+        case 1: return REV_THROUGH_BORE;
+        default: return null;
+      }
+    }
+
+    public static com.google.protobuf.Internal.EnumLiteMap<Encoder_Type>
+        internalGetValueMap() {
+      return internalValueMap;
+    }
+    private static final com.google.protobuf.Internal.EnumLiteMap<
+        Encoder_Type> internalValueMap =
+          new com.google.protobuf.Internal.EnumLiteMap<Encoder_Type>() {
+            public Encoder_Type findValueByNumber(int number) {
+              return Encoder_Type.forNumber(number);
+            }
+          };
+
+    public final com.google.protobuf.Descriptors.EnumValueDescriptor
+        getValueDescriptor() {
+      if (this == UNRECOGNIZED) {
+        throw new java.lang.IllegalStateException(
+            "Can't get the descriptor of an unrecognized enum value.");
+      }
+      return getDescriptor().getValues().get(ordinal());
+    }
+    public final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptorForType() {
+      return getDescriptor();
+    }
+    public static final com.google.protobuf.Descriptors.EnumDescriptor
+        getDescriptor() {
+      return frc.team3171.protos.SlewDrive.getDescriptor().getEnumTypes().get(1);
+    }
+
+    private static final Encoder_Type[] VALUES = values();
+
+    public static Encoder_Type valueOf(
+        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+      if (desc.getType() != getDescriptor()) {
+        throw new java.lang.IllegalArgumentException(
+          "EnumValueDescriptor is not for this type.");
+      }
+      if (desc.getIndex() == -1) {
+        return UNRECOGNIZED;
+      }
+      return VALUES[desc.getIndex()];
+    }
+
+    private final int value;
+
+    private Encoder_Type(int value) {
+      this.value = value;
+    }
+
+    // @@protoc_insertion_point(enum_scope:frc.team3171.protos.Encoder_Type)
+  }
+
   public interface SlewCalibrationOrBuilder extends
       // @@protoc_insertion_point(interface_extends:frc.team3171.protos.SlewCalibration)
       com.google.protobuf.MessageOrBuilder {
@@ -715,11 +940,1391 @@ public final class SlewDrive {
 
   }
 
+  public interface SlewUnitConfigurationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:frc.team3171.protos.SlewUnitConfiguration)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+     * @return The enum numeric value on the wire for driveMotorType.
+     */
+    int getDriveMotorTypeValue();
+    /**
+     * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+     * @return The driveMotorType.
+     */
+    frc.team3171.protos.SlewDrive.Motor_Type getDriveMotorType();
+
+    /**
+     * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+     * @return The enum numeric value on the wire for slewMotorType.
+     */
+    int getSlewMotorTypeValue();
+    /**
+     * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+     * @return The slewMotorType.
+     */
+    frc.team3171.protos.SlewDrive.Motor_Type getSlewMotorType();
+
+    /**
+     * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+     * @return The enum numeric value on the wire for absoluteEncoderType.
+     */
+    int getAbsoluteEncoderTypeValue();
+    /**
+     * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+     * @return The absoluteEncoderType.
+     */
+    frc.team3171.protos.SlewDrive.Encoder_Type getAbsoluteEncoderType();
+
+    /**
+     * <code>int32 driveMotorID = 4;</code>
+     * @return The driveMotorID.
+     */
+    int getDriveMotorID();
+
+    /**
+     * <code>int32 slewMotorID = 5;</code>
+     * @return The slewMotorID.
+     */
+    int getSlewMotorID();
+
+    /**
+     * <code>int32 absoluteEncoderID = 6;</code>
+     * @return The absoluteEncoderID.
+     */
+    int getAbsoluteEncoderID();
+
+    /**
+     * <code>bool driveMotorInverted = 7;</code>
+     * @return The driveMotorInverted.
+     */
+    boolean getDriveMotorInverted();
+
+    /**
+     * <code>bool slewMotorInverted = 8;</code>
+     * @return The slewMotorInverted.
+     */
+    boolean getSlewMotorInverted();
+
+    /**
+     * <code>bool absoluteEncoderInverted = 9;</code>
+     * @return The absoluteEncoderInverted.
+     */
+    boolean getAbsoluteEncoderInverted();
+
+    /**
+     * <code>bool logPIDData = 10;</code>
+     * @return The logPIDData.
+     */
+    boolean getLogPIDData();
+
+    /**
+     * <code>string canbus = 11;</code>
+     * @return The canbus.
+     */
+    java.lang.String getCanbus();
+    /**
+     * <code>string canbus = 11;</code>
+     * @return The bytes for canbus.
+     */
+    com.google.protobuf.ByteString
+        getCanbusBytes();
+  }
+  /**
+   * Protobuf type {@code frc.team3171.protos.SlewUnitConfiguration}
+   */
+  public static final class SlewUnitConfiguration extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:frc.team3171.protos.SlewUnitConfiguration)
+      SlewUnitConfigurationOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use SlewUnitConfiguration.newBuilder() to construct.
+    private SlewUnitConfiguration(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private SlewUnitConfiguration() {
+      driveMotorType_ = 0;
+      slewMotorType_ = 0;
+      absoluteEncoderType_ = 0;
+      canbus_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new SlewUnitConfiguration();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return frc.team3171.protos.SlewDrive.internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return frc.team3171.protos.SlewDrive.internal_static_frc_team3171_protos_SlewUnitConfiguration_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              frc.team3171.protos.SlewDrive.SlewUnitConfiguration.class, frc.team3171.protos.SlewDrive.SlewUnitConfiguration.Builder.class);
+    }
+
+    public static final int DRIVEMOTORTYPE_FIELD_NUMBER = 1;
+    private int driveMotorType_ = 0;
+    /**
+     * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+     * @return The enum numeric value on the wire for driveMotorType.
+     */
+    @java.lang.Override public int getDriveMotorTypeValue() {
+      return driveMotorType_;
+    }
+    /**
+     * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+     * @return The driveMotorType.
+     */
+    @java.lang.Override public frc.team3171.protos.SlewDrive.Motor_Type getDriveMotorType() {
+      frc.team3171.protos.SlewDrive.Motor_Type result = frc.team3171.protos.SlewDrive.Motor_Type.forNumber(driveMotorType_);
+      return result == null ? frc.team3171.protos.SlewDrive.Motor_Type.UNRECOGNIZED : result;
+    }
+
+    public static final int SLEWMOTORTYPE_FIELD_NUMBER = 2;
+    private int slewMotorType_ = 0;
+    /**
+     * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+     * @return The enum numeric value on the wire for slewMotorType.
+     */
+    @java.lang.Override public int getSlewMotorTypeValue() {
+      return slewMotorType_;
+    }
+    /**
+     * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+     * @return The slewMotorType.
+     */
+    @java.lang.Override public frc.team3171.protos.SlewDrive.Motor_Type getSlewMotorType() {
+      frc.team3171.protos.SlewDrive.Motor_Type result = frc.team3171.protos.SlewDrive.Motor_Type.forNumber(slewMotorType_);
+      return result == null ? frc.team3171.protos.SlewDrive.Motor_Type.UNRECOGNIZED : result;
+    }
+
+    public static final int ABSOLUTEENCODERTYPE_FIELD_NUMBER = 3;
+    private int absoluteEncoderType_ = 0;
+    /**
+     * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+     * @return The enum numeric value on the wire for absoluteEncoderType.
+     */
+    @java.lang.Override public int getAbsoluteEncoderTypeValue() {
+      return absoluteEncoderType_;
+    }
+    /**
+     * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+     * @return The absoluteEncoderType.
+     */
+    @java.lang.Override public frc.team3171.protos.SlewDrive.Encoder_Type getAbsoluteEncoderType() {
+      frc.team3171.protos.SlewDrive.Encoder_Type result = frc.team3171.protos.SlewDrive.Encoder_Type.forNumber(absoluteEncoderType_);
+      return result == null ? frc.team3171.protos.SlewDrive.Encoder_Type.UNRECOGNIZED : result;
+    }
+
+    public static final int DRIVEMOTORID_FIELD_NUMBER = 4;
+    private int driveMotorID_ = 0;
+    /**
+     * <code>int32 driveMotorID = 4;</code>
+     * @return The driveMotorID.
+     */
+    @java.lang.Override
+    public int getDriveMotorID() {
+      return driveMotorID_;
+    }
+
+    public static final int SLEWMOTORID_FIELD_NUMBER = 5;
+    private int slewMotorID_ = 0;
+    /**
+     * <code>int32 slewMotorID = 5;</code>
+     * @return The slewMotorID.
+     */
+    @java.lang.Override
+    public int getSlewMotorID() {
+      return slewMotorID_;
+    }
+
+    public static final int ABSOLUTEENCODERID_FIELD_NUMBER = 6;
+    private int absoluteEncoderID_ = 0;
+    /**
+     * <code>int32 absoluteEncoderID = 6;</code>
+     * @return The absoluteEncoderID.
+     */
+    @java.lang.Override
+    public int getAbsoluteEncoderID() {
+      return absoluteEncoderID_;
+    }
+
+    public static final int DRIVEMOTORINVERTED_FIELD_NUMBER = 7;
+    private boolean driveMotorInverted_ = false;
+    /**
+     * <code>bool driveMotorInverted = 7;</code>
+     * @return The driveMotorInverted.
+     */
+    @java.lang.Override
+    public boolean getDriveMotorInverted() {
+      return driveMotorInverted_;
+    }
+
+    public static final int SLEWMOTORINVERTED_FIELD_NUMBER = 8;
+    private boolean slewMotorInverted_ = false;
+    /**
+     * <code>bool slewMotorInverted = 8;</code>
+     * @return The slewMotorInverted.
+     */
+    @java.lang.Override
+    public boolean getSlewMotorInverted() {
+      return slewMotorInverted_;
+    }
+
+    public static final int ABSOLUTEENCODERINVERTED_FIELD_NUMBER = 9;
+    private boolean absoluteEncoderInverted_ = false;
+    /**
+     * <code>bool absoluteEncoderInverted = 9;</code>
+     * @return The absoluteEncoderInverted.
+     */
+    @java.lang.Override
+    public boolean getAbsoluteEncoderInverted() {
+      return absoluteEncoderInverted_;
+    }
+
+    public static final int LOGPIDDATA_FIELD_NUMBER = 10;
+    private boolean logPIDData_ = false;
+    /**
+     * <code>bool logPIDData = 10;</code>
+     * @return The logPIDData.
+     */
+    @java.lang.Override
+    public boolean getLogPIDData() {
+      return logPIDData_;
+    }
+
+    public static final int CANBUS_FIELD_NUMBER = 11;
+    @SuppressWarnings("serial")
+    private volatile java.lang.Object canbus_ = "";
+    /**
+     * <code>string canbus = 11;</code>
+     * @return The canbus.
+     */
+    @java.lang.Override
+    public java.lang.String getCanbus() {
+      java.lang.Object ref = canbus_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        canbus_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string canbus = 11;</code>
+     * @return The bytes for canbus.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getCanbusBytes() {
+      java.lang.Object ref = canbus_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        canbus_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (driveMotorType_ != frc.team3171.protos.SlewDrive.Motor_Type.CTRE_FALCON.getNumber()) {
+        output.writeEnum(1, driveMotorType_);
+      }
+      if (slewMotorType_ != frc.team3171.protos.SlewDrive.Motor_Type.CTRE_FALCON.getNumber()) {
+        output.writeEnum(2, slewMotorType_);
+      }
+      if (absoluteEncoderType_ != frc.team3171.protos.SlewDrive.Encoder_Type.CTRE_CANCODER.getNumber()) {
+        output.writeEnum(3, absoluteEncoderType_);
+      }
+      if (driveMotorID_ != 0) {
+        output.writeInt32(4, driveMotorID_);
+      }
+      if (slewMotorID_ != 0) {
+        output.writeInt32(5, slewMotorID_);
+      }
+      if (absoluteEncoderID_ != 0) {
+        output.writeInt32(6, absoluteEncoderID_);
+      }
+      if (driveMotorInverted_ != false) {
+        output.writeBool(7, driveMotorInverted_);
+      }
+      if (slewMotorInverted_ != false) {
+        output.writeBool(8, slewMotorInverted_);
+      }
+      if (absoluteEncoderInverted_ != false) {
+        output.writeBool(9, absoluteEncoderInverted_);
+      }
+      if (logPIDData_ != false) {
+        output.writeBool(10, logPIDData_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(canbus_)) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 11, canbus_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (driveMotorType_ != frc.team3171.protos.SlewDrive.Motor_Type.CTRE_FALCON.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(1, driveMotorType_);
+      }
+      if (slewMotorType_ != frc.team3171.protos.SlewDrive.Motor_Type.CTRE_FALCON.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, slewMotorType_);
+      }
+      if (absoluteEncoderType_ != frc.team3171.protos.SlewDrive.Encoder_Type.CTRE_CANCODER.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, absoluteEncoderType_);
+      }
+      if (driveMotorID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, driveMotorID_);
+      }
+      if (slewMotorID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, slewMotorID_);
+      }
+      if (absoluteEncoderID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, absoluteEncoderID_);
+      }
+      if (driveMotorInverted_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(7, driveMotorInverted_);
+      }
+      if (slewMotorInverted_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(8, slewMotorInverted_);
+      }
+      if (absoluteEncoderInverted_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, absoluteEncoderInverted_);
+      }
+      if (logPIDData_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(10, logPIDData_);
+      }
+      if (!com.google.protobuf.GeneratedMessageV3.isStringEmpty(canbus_)) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(11, canbus_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof frc.team3171.protos.SlewDrive.SlewUnitConfiguration)) {
+        return super.equals(obj);
+      }
+      frc.team3171.protos.SlewDrive.SlewUnitConfiguration other = (frc.team3171.protos.SlewDrive.SlewUnitConfiguration) obj;
+
+      if (driveMotorType_ != other.driveMotorType_) return false;
+      if (slewMotorType_ != other.slewMotorType_) return false;
+      if (absoluteEncoderType_ != other.absoluteEncoderType_) return false;
+      if (getDriveMotorID()
+          != other.getDriveMotorID()) return false;
+      if (getSlewMotorID()
+          != other.getSlewMotorID()) return false;
+      if (getAbsoluteEncoderID()
+          != other.getAbsoluteEncoderID()) return false;
+      if (getDriveMotorInverted()
+          != other.getDriveMotorInverted()) return false;
+      if (getSlewMotorInverted()
+          != other.getSlewMotorInverted()) return false;
+      if (getAbsoluteEncoderInverted()
+          != other.getAbsoluteEncoderInverted()) return false;
+      if (getLogPIDData()
+          != other.getLogPIDData()) return false;
+      if (!getCanbus()
+          .equals(other.getCanbus())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + DRIVEMOTORTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + driveMotorType_;
+      hash = (37 * hash) + SLEWMOTORTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + slewMotorType_;
+      hash = (37 * hash) + ABSOLUTEENCODERTYPE_FIELD_NUMBER;
+      hash = (53 * hash) + absoluteEncoderType_;
+      hash = (37 * hash) + DRIVEMOTORID_FIELD_NUMBER;
+      hash = (53 * hash) + getDriveMotorID();
+      hash = (37 * hash) + SLEWMOTORID_FIELD_NUMBER;
+      hash = (53 * hash) + getSlewMotorID();
+      hash = (37 * hash) + ABSOLUTEENCODERID_FIELD_NUMBER;
+      hash = (53 * hash) + getAbsoluteEncoderID();
+      hash = (37 * hash) + DRIVEMOTORINVERTED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getDriveMotorInverted());
+      hash = (37 * hash) + SLEWMOTORINVERTED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSlewMotorInverted());
+      hash = (37 * hash) + ABSOLUTEENCODERINVERTED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getAbsoluteEncoderInverted());
+      hash = (37 * hash) + LOGPIDDATA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getLogPIDData());
+      hash = (37 * hash) + CANBUS_FIELD_NUMBER;
+      hash = (53 * hash) + getCanbus().hashCode();
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(frc.team3171.protos.SlewDrive.SlewUnitConfiguration prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code frc.team3171.protos.SlewUnitConfiguration}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:frc.team3171.protos.SlewUnitConfiguration)
+        frc.team3171.protos.SlewDrive.SlewUnitConfigurationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return frc.team3171.protos.SlewDrive.internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return frc.team3171.protos.SlewDrive.internal_static_frc_team3171_protos_SlewUnitConfiguration_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                frc.team3171.protos.SlewDrive.SlewUnitConfiguration.class, frc.team3171.protos.SlewDrive.SlewUnitConfiguration.Builder.class);
+      }
+
+      // Construct using frc.team3171.protos.SlewDrive.SlewUnitConfiguration.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        driveMotorType_ = 0;
+        slewMotorType_ = 0;
+        absoluteEncoderType_ = 0;
+        driveMotorID_ = 0;
+        slewMotorID_ = 0;
+        absoluteEncoderID_ = 0;
+        driveMotorInverted_ = false;
+        slewMotorInverted_ = false;
+        absoluteEncoderInverted_ = false;
+        logPIDData_ = false;
+        canbus_ = "";
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return frc.team3171.protos.SlewDrive.internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.SlewUnitConfiguration getDefaultInstanceForType() {
+        return frc.team3171.protos.SlewDrive.SlewUnitConfiguration.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.SlewUnitConfiguration build() {
+        frc.team3171.protos.SlewDrive.SlewUnitConfiguration result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.SlewUnitConfiguration buildPartial() {
+        frc.team3171.protos.SlewDrive.SlewUnitConfiguration result = new frc.team3171.protos.SlewDrive.SlewUnitConfiguration(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(frc.team3171.protos.SlewDrive.SlewUnitConfiguration result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.driveMotorType_ = driveMotorType_;
+        }
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.slewMotorType_ = slewMotorType_;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.absoluteEncoderType_ = absoluteEncoderType_;
+        }
+        if (((from_bitField0_ & 0x00000008) != 0)) {
+          result.driveMotorID_ = driveMotorID_;
+        }
+        if (((from_bitField0_ & 0x00000010) != 0)) {
+          result.slewMotorID_ = slewMotorID_;
+        }
+        if (((from_bitField0_ & 0x00000020) != 0)) {
+          result.absoluteEncoderID_ = absoluteEncoderID_;
+        }
+        if (((from_bitField0_ & 0x00000040) != 0)) {
+          result.driveMotorInverted_ = driveMotorInverted_;
+        }
+        if (((from_bitField0_ & 0x00000080) != 0)) {
+          result.slewMotorInverted_ = slewMotorInverted_;
+        }
+        if (((from_bitField0_ & 0x00000100) != 0)) {
+          result.absoluteEncoderInverted_ = absoluteEncoderInverted_;
+        }
+        if (((from_bitField0_ & 0x00000200) != 0)) {
+          result.logPIDData_ = logPIDData_;
+        }
+        if (((from_bitField0_ & 0x00000400) != 0)) {
+          result.canbus_ = canbus_;
+        }
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof frc.team3171.protos.SlewDrive.SlewUnitConfiguration) {
+          return mergeFrom((frc.team3171.protos.SlewDrive.SlewUnitConfiguration)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(frc.team3171.protos.SlewDrive.SlewUnitConfiguration other) {
+        if (other == frc.team3171.protos.SlewDrive.SlewUnitConfiguration.getDefaultInstance()) return this;
+        if (other.driveMotorType_ != 0) {
+          setDriveMotorTypeValue(other.getDriveMotorTypeValue());
+        }
+        if (other.slewMotorType_ != 0) {
+          setSlewMotorTypeValue(other.getSlewMotorTypeValue());
+        }
+        if (other.absoluteEncoderType_ != 0) {
+          setAbsoluteEncoderTypeValue(other.getAbsoluteEncoderTypeValue());
+        }
+        if (other.getDriveMotorID() != 0) {
+          setDriveMotorID(other.getDriveMotorID());
+        }
+        if (other.getSlewMotorID() != 0) {
+          setSlewMotorID(other.getSlewMotorID());
+        }
+        if (other.getAbsoluteEncoderID() != 0) {
+          setAbsoluteEncoderID(other.getAbsoluteEncoderID());
+        }
+        if (other.getDriveMotorInverted() != false) {
+          setDriveMotorInverted(other.getDriveMotorInverted());
+        }
+        if (other.getSlewMotorInverted() != false) {
+          setSlewMotorInverted(other.getSlewMotorInverted());
+        }
+        if (other.getAbsoluteEncoderInverted() != false) {
+          setAbsoluteEncoderInverted(other.getAbsoluteEncoderInverted());
+        }
+        if (other.getLogPIDData() != false) {
+          setLogPIDData(other.getLogPIDData());
+        }
+        if (!other.getCanbus().isEmpty()) {
+          canbus_ = other.canbus_;
+          bitField0_ |= 0x00000400;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 8: {
+                driveMotorType_ = input.readEnum();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 8
+              case 16: {
+                slewMotorType_ = input.readEnum();
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 16
+              case 24: {
+                absoluteEncoderType_ = input.readEnum();
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 24
+              case 32: {
+                driveMotorID_ = input.readInt32();
+                bitField0_ |= 0x00000008;
+                break;
+              } // case 32
+              case 40: {
+                slewMotorID_ = input.readInt32();
+                bitField0_ |= 0x00000010;
+                break;
+              } // case 40
+              case 48: {
+                absoluteEncoderID_ = input.readInt32();
+                bitField0_ |= 0x00000020;
+                break;
+              } // case 48
+              case 56: {
+                driveMotorInverted_ = input.readBool();
+                bitField0_ |= 0x00000040;
+                break;
+              } // case 56
+              case 64: {
+                slewMotorInverted_ = input.readBool();
+                bitField0_ |= 0x00000080;
+                break;
+              } // case 64
+              case 72: {
+                absoluteEncoderInverted_ = input.readBool();
+                bitField0_ |= 0x00000100;
+                break;
+              } // case 72
+              case 80: {
+                logPIDData_ = input.readBool();
+                bitField0_ |= 0x00000200;
+                break;
+              } // case 80
+              case 90: {
+                canbus_ = input.readStringRequireUtf8();
+                bitField0_ |= 0x00000400;
+                break;
+              } // case 90
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private int driveMotorType_ = 0;
+      /**
+       * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+       * @return The enum numeric value on the wire for driveMotorType.
+       */
+      @java.lang.Override public int getDriveMotorTypeValue() {
+        return driveMotorType_;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+       * @param value The enum numeric value on the wire for driveMotorType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDriveMotorTypeValue(int value) {
+        driveMotorType_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+       * @return The driveMotorType.
+       */
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.Motor_Type getDriveMotorType() {
+        frc.team3171.protos.SlewDrive.Motor_Type result = frc.team3171.protos.SlewDrive.Motor_Type.forNumber(driveMotorType_);
+        return result == null ? frc.team3171.protos.SlewDrive.Motor_Type.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+       * @param value The driveMotorType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDriveMotorType(frc.team3171.protos.SlewDrive.Motor_Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000001;
+        driveMotorType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type driveMotorType = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDriveMotorType() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        driveMotorType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int slewMotorType_ = 0;
+      /**
+       * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+       * @return The enum numeric value on the wire for slewMotorType.
+       */
+      @java.lang.Override public int getSlewMotorTypeValue() {
+        return slewMotorType_;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+       * @param value The enum numeric value on the wire for slewMotorType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSlewMotorTypeValue(int value) {
+        slewMotorType_ = value;
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+       * @return The slewMotorType.
+       */
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.Motor_Type getSlewMotorType() {
+        frc.team3171.protos.SlewDrive.Motor_Type result = frc.team3171.protos.SlewDrive.Motor_Type.forNumber(slewMotorType_);
+        return result == null ? frc.team3171.protos.SlewDrive.Motor_Type.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+       * @param value The slewMotorType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSlewMotorType(frc.team3171.protos.SlewDrive.Motor_Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        slewMotorType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Motor_Type slewMotorType = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSlewMotorType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        slewMotorType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int absoluteEncoderType_ = 0;
+      /**
+       * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+       * @return The enum numeric value on the wire for absoluteEncoderType.
+       */
+      @java.lang.Override public int getAbsoluteEncoderTypeValue() {
+        return absoluteEncoderType_;
+      }
+      /**
+       * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+       * @param value The enum numeric value on the wire for absoluteEncoderType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAbsoluteEncoderTypeValue(int value) {
+        absoluteEncoderType_ = value;
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+       * @return The absoluteEncoderType.
+       */
+      @java.lang.Override
+      public frc.team3171.protos.SlewDrive.Encoder_Type getAbsoluteEncoderType() {
+        frc.team3171.protos.SlewDrive.Encoder_Type result = frc.team3171.protos.SlewDrive.Encoder_Type.forNumber(absoluteEncoderType_);
+        return result == null ? frc.team3171.protos.SlewDrive.Encoder_Type.UNRECOGNIZED : result;
+      }
+      /**
+       * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+       * @param value The absoluteEncoderType to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAbsoluteEncoderType(frc.team3171.protos.SlewDrive.Encoder_Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        absoluteEncoderType_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.Encoder_Type absoluteEncoderType = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAbsoluteEncoderType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        absoluteEncoderType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int driveMotorID_ ;
+      /**
+       * <code>int32 driveMotorID = 4;</code>
+       * @return The driveMotorID.
+       */
+      @java.lang.Override
+      public int getDriveMotorID() {
+        return driveMotorID_;
+      }
+      /**
+       * <code>int32 driveMotorID = 4;</code>
+       * @param value The driveMotorID to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDriveMotorID(int value) {
+
+        driveMotorID_ = value;
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 driveMotorID = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDriveMotorID() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        driveMotorID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int slewMotorID_ ;
+      /**
+       * <code>int32 slewMotorID = 5;</code>
+       * @return The slewMotorID.
+       */
+      @java.lang.Override
+      public int getSlewMotorID() {
+        return slewMotorID_;
+      }
+      /**
+       * <code>int32 slewMotorID = 5;</code>
+       * @param value The slewMotorID to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSlewMotorID(int value) {
+
+        slewMotorID_ = value;
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 slewMotorID = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSlewMotorID() {
+        bitField0_ = (bitField0_ & ~0x00000010);
+        slewMotorID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int absoluteEncoderID_ ;
+      /**
+       * <code>int32 absoluteEncoderID = 6;</code>
+       * @return The absoluteEncoderID.
+       */
+      @java.lang.Override
+      public int getAbsoluteEncoderID() {
+        return absoluteEncoderID_;
+      }
+      /**
+       * <code>int32 absoluteEncoderID = 6;</code>
+       * @param value The absoluteEncoderID to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAbsoluteEncoderID(int value) {
+
+        absoluteEncoderID_ = value;
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 absoluteEncoderID = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAbsoluteEncoderID() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        absoluteEncoderID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean driveMotorInverted_ ;
+      /**
+       * <code>bool driveMotorInverted = 7;</code>
+       * @return The driveMotorInverted.
+       */
+      @java.lang.Override
+      public boolean getDriveMotorInverted() {
+        return driveMotorInverted_;
+      }
+      /**
+       * <code>bool driveMotorInverted = 7;</code>
+       * @param value The driveMotorInverted to set.
+       * @return This builder for chaining.
+       */
+      public Builder setDriveMotorInverted(boolean value) {
+
+        driveMotorInverted_ = value;
+        bitField0_ |= 0x00000040;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool driveMotorInverted = 7;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearDriveMotorInverted() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        driveMotorInverted_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean slewMotorInverted_ ;
+      /**
+       * <code>bool slewMotorInverted = 8;</code>
+       * @return The slewMotorInverted.
+       */
+      @java.lang.Override
+      public boolean getSlewMotorInverted() {
+        return slewMotorInverted_;
+      }
+      /**
+       * <code>bool slewMotorInverted = 8;</code>
+       * @param value The slewMotorInverted to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSlewMotorInverted(boolean value) {
+
+        slewMotorInverted_ = value;
+        bitField0_ |= 0x00000080;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool slewMotorInverted = 8;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSlewMotorInverted() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        slewMotorInverted_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean absoluteEncoderInverted_ ;
+      /**
+       * <code>bool absoluteEncoderInverted = 9;</code>
+       * @return The absoluteEncoderInverted.
+       */
+      @java.lang.Override
+      public boolean getAbsoluteEncoderInverted() {
+        return absoluteEncoderInverted_;
+      }
+      /**
+       * <code>bool absoluteEncoderInverted = 9;</code>
+       * @param value The absoluteEncoderInverted to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAbsoluteEncoderInverted(boolean value) {
+
+        absoluteEncoderInverted_ = value;
+        bitField0_ |= 0x00000100;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool absoluteEncoderInverted = 9;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAbsoluteEncoderInverted() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        absoluteEncoderInverted_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean logPIDData_ ;
+      /**
+       * <code>bool logPIDData = 10;</code>
+       * @return The logPIDData.
+       */
+      @java.lang.Override
+      public boolean getLogPIDData() {
+        return logPIDData_;
+      }
+      /**
+       * <code>bool logPIDData = 10;</code>
+       * @param value The logPIDData to set.
+       * @return This builder for chaining.
+       */
+      public Builder setLogPIDData(boolean value) {
+
+        logPIDData_ = value;
+        bitField0_ |= 0x00000200;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool logPIDData = 10;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearLogPIDData() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        logPIDData_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object canbus_ = "";
+      /**
+       * <code>string canbus = 11;</code>
+       * @return The canbus.
+       */
+      public java.lang.String getCanbus() {
+        java.lang.Object ref = canbus_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          canbus_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string canbus = 11;</code>
+       * @return The bytes for canbus.
+       */
+      public com.google.protobuf.ByteString
+          getCanbusBytes() {
+        java.lang.Object ref = canbus_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          canbus_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string canbus = 11;</code>
+       * @param value The canbus to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCanbus(
+          java.lang.String value) {
+        if (value == null) { throw new NullPointerException(); }
+        canbus_ = value;
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string canbus = 11;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCanbus() {
+        canbus_ = getDefaultInstance().getCanbus();
+        bitField0_ = (bitField0_ & ~0x00000400);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string canbus = 11;</code>
+       * @param value The bytes for canbus to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCanbusBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) { throw new NullPointerException(); }
+        checkByteStringIsUtf8(value);
+        canbus_ = value;
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:frc.team3171.protos.SlewUnitConfiguration)
+    }
+
+    // @@protoc_insertion_point(class_scope:frc.team3171.protos.SlewUnitConfiguration)
+    private static final frc.team3171.protos.SlewDrive.SlewUnitConfiguration DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new frc.team3171.protos.SlewDrive.SlewUnitConfiguration();
+    }
+
+    public static frc.team3171.protos.SlewDrive.SlewUnitConfiguration getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<SlewUnitConfiguration>
+        PARSER = new com.google.protobuf.AbstractParser<SlewUnitConfiguration>() {
+      @java.lang.Override
+      public SlewUnitConfiguration parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<SlewUnitConfiguration> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SlewUnitConfiguration> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public frc.team3171.protos.SlewDrive.SlewUnitConfiguration getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_frc_team3171_protos_SlewCalibration_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_frc_team3171_protos_SlewCalibration_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_frc_team3171_protos_SlewUnitConfiguration_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -733,8 +2338,21 @@ public final class SlewDrive {
       "frc.team3171.protos\"\205\001\n\017SlewCalibration\022" +
       "\033\n\023leftFrontSlewOffset\030\001 \001(\001\022\032\n\022leftRear" +
       "SlewOffset\030\002 \001(\001\022\034\n\024rightFrontSlewOffset" +
-      "\030\003 \001(\001\022\033\n\023rightRearSlewOffset\030\004 \001(\001b\006pro" +
-      "to3"
+      "\030\003 \001(\001\022\033\n\023rightRearSlewOffset\030\004 \001(\001\"\212\003\n\025" +
+      "SlewUnitConfiguration\0227\n\016driveMotorType\030" +
+      "\001 \001(\0162\037.frc.team3171.protos.Motor_Type\0226" +
+      "\n\rslewMotorType\030\002 \001(\0162\037.frc.team3171.pro" +
+      "tos.Motor_Type\022>\n\023absoluteEncoderType\030\003 " +
+      "\001(\0162!.frc.team3171.protos.Encoder_Type\022\024" +
+      "\n\014driveMotorID\030\004 \001(\005\022\023\n\013slewMotorID\030\005 \001(" +
+      "\005\022\031\n\021absoluteEncoderID\030\006 \001(\005\022\032\n\022driveMot" +
+      "orInverted\030\007 \001(\010\022\031\n\021slewMotorInverted\030\010 " +
+      "\001(\010\022\037\n\027absoluteEncoderInverted\030\t \001(\010\022\022\n\n" +
+      "logPIDData\030\n \001(\010\022\016\n\006canbus\030\013 \001(\t*D\n\nMoto" +
+      "r_Type\022\017\n\013CTRE_FALCON\020\000\022\021\n\rREV_SPARK_MAX" +
+      "\020\001\022\022\n\016REV_SPARK_FLEX\020\002*7\n\014Encoder_Type\022\021" +
+      "\n\rCTRE_CANCODER\020\000\022\024\n\020REV_THROUGH_BORE\020\001b" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -746,6 +2364,12 @@ public final class SlewDrive {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_frc_team3171_protos_SlewCalibration_descriptor,
         new java.lang.String[] { "LeftFrontSlewOffset", "LeftRearSlewOffset", "RightFrontSlewOffset", "RightRearSlewOffset", });
+    internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_frc_team3171_protos_SlewUnitConfiguration_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_frc_team3171_protos_SlewUnitConfiguration_descriptor,
+        new java.lang.String[] { "DriveMotorType", "SlewMotorType", "AbsoluteEncoderType", "DriveMotorID", "SlewMotorID", "AbsoluteEncoderID", "DriveMotorInverted", "SlewMotorInverted", "AbsoluteEncoderInverted", "LogPIDData", "Canbus", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

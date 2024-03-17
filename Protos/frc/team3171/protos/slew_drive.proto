@@ -8,3 +8,33 @@ message SlewCalibration {
     double rightFrontSlewOffset = 3;
     double rightRearSlewOffset = 4;
 }
+
+enum Motor_Type {
+    CTRE_FALCON = 0;
+    REV_SPARK_MAX = 1;
+    REV_SPARK_FLEX = 2;
+}
+
+enum Encoder_Type {
+    CTRE_CANCODER = 0;
+    REV_THROUGH_BORE = 1;
+}
+
+
+message SlewUnitConfiguration {
+    Motor_Type driveMotorType = 1;
+    Motor_Type slewMotorType = 2;
+
+    Encoder_Type absoluteEncoderType = 3;
+
+    int32 driveMotorID = 4;
+    int32 slewMotorID = 5;
+    int32 absoluteEncoderID = 6;
+
+    bool driveMotorInverted = 7;
+    bool slewMotorInverted = 8;
+    bool absoluteEncoderInverted = 9;
+    bool logPIDData = 10;
+
+    string canbus = 11;
+}
