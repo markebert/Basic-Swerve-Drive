@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package frc.team3171.protos;
+option java_multiple_files = true;
+
+message SlewCalibration {
+    double leftFrontSlewOffset = 1;
+    double leftRearSlewOffset = 2;
+    double rightFrontSlewOffset = 3;
+    double rightRearSlewOffset = 4;
+}

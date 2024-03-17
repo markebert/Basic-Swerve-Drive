@@ -60,14 +60,14 @@ public class AutonRecorder {
      */
     public void saveToFile(final String autonFileName) {
         try {
-            // Check if the auton file exists, if it does delete the file and recreate it
+            // Check if the auton file exists, if it does delete then file and recreate it
             File autonFile = new File(String.format("/home/lvuser/%s.txt", autonFileName));
             if (autonFile.exists()) {
                 autonFile.delete();
             }
             autonFile.createNewFile();
 
-            // Create a buffered writter and write the contents of the auton recorder
+            // Create a buffered writer and write the contents of the auton recorder
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(autonFile))) {
                 AutonRecorderData recordedData = autonRecorderData.build();
                 writer.write(recordedData.toString());
@@ -90,9 +90,9 @@ public class AutonRecorder {
         AutonRecorderData autonRecordedData;
         try (FileInputStream autonFile = new FileInputStream(String.format("/home/lvuser/%s.txt", autonFileName))) {
             // Gets the saved auton file as a coded input stream
-            CodedInputStream test = CodedInputStream.newInstance(autonFile);
+            CodedInputStream inputStream = CodedInputStream.newInstance(autonFile);
             // Parses the data from the stream into the respecitve protobuf object
-            autonRecordedData = AutonRecorderData.parseFrom(test);
+            autonRecordedData = AutonRecorderData.parseFrom(inputStream);
             System.out.println("Auton Successfully Loaded!");
         } catch (Exception e) {
             autonRecordedData = AutonRecorderData.newBuilder().build();

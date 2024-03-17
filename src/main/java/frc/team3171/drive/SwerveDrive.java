@@ -1,20 +1,22 @@
 package frc.team3171.drive;
 
 // Java Imports
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import com.google.protobuf.CodedInputStream;
 
 // FRC Imports
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
+import frc.team3171.protos.SlewCalibration;
 import frc.team3171.sensors.UDPClient;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 import static frc.team3171.HelperFunctions.Add_Two_Vectors;
@@ -36,8 +38,7 @@ public class SwerveDrive implements RobotProperties {
     // PID Data Logger
     private List<UDPClient> udpClients;
 
-    public SwerveDrive(final SwerveUnitConfig lrUnitConfig, final SwerveUnitConfig lfUnitConfig, final SwerveUnitConfig rfUnitConfig,
-            final SwerveUnitConfig rrUnitConfig) {
+    public SwerveDrive(final SwerveUnitConfig lrUnitConfig, final SwerveUnitConfig lfUnitConfig, final SwerveUnitConfig rfUnitConfig, final SwerveUnitConfig rrUnitConfig) {
         // Init Swerve Units
         this.lrUnit = new SwerveUnit(lrUnitConfig);
         this.lfUnit = new SwerveUnit(lfUnitConfig);
@@ -95,8 +96,7 @@ public class SwerveDrive implements RobotProperties {
             rrAngle = rrResultantVector[0];
 
             // Find vector with the largest magnitude
-            final double[] largestVector = Return_Vector_With_Largest_Magnitude(lfResultantVector, lrResultantVector, rfResultantVector,
-                    rrResultantVector);
+            final double[] largestVector = Return_Vector_With_Largest_Magnitude(lfResultantVector, lrResultantVector, rfResultantVector, rrResultantVector);
 
             // Update the magnitudes, if the largest vector exceeds 1.0 then scale all others relative to it
             lfMagnitude = Map(lfResultantVector[1], 0, largestVector[1] > 1 ? largestVector[1] : 1, 0, boostMode ? 1 : MAX_DRIVE_SPEED);
@@ -172,34 +172,36 @@ public class SwerveDrive implements RobotProperties {
             rfUnit.zeroModule();
             rrUnit.zeroModule();
         }
-        final double lrSlewOffset = lrUnit.getSlewOffset();
-        final double lfSlewOffset = lfUnit.getSlewOffset();
-        final double rfSlewOffset = rfUnit.getSlewOffset();
-        final double rrSlewOffset = rrUnit.getSlewOffset();
-        saveSlewCalibration(String.format("%.4f,%.4f,%.4f,%.4f;\n", lrSlewOffset, lfSlewOffset, rfSlewOffset, rrSlewOffset));
+
+        var slewCalibration = SlewCalibration.newBuilder();
+        slewCalibration.setLeftFrontSlewOffset(lfUnit.getSlewOffset());
+        slewCalibration.setLeftRearSlewOffset(lrUnit.getSlewOffset());
+        slewCalibration.setRightFrontSlewOffset(rfUnit.getSlewOffset());
+        slewCalibration.setRightRearSlewOffset(rrUnit.getSlewOffset());
+        saveSlewCalibration(slewCalibration.build());
     }
 
     /**
-     * Saves the current data collected by the auton recorder to the specified file
-     * path and clears the AutonRecorder.
+     * Saves the current data collected by the auton recorder to the specified file path and clears the AutonRecorder.
      * 
-     * @param autonFileName
-     *            The path to the file to save the auton data to.
+     * @param autonFileName The path to the file to save the auton data to.
      */
-    public synchronized void saveSlewCalibration(final String slewOffsets) {
+    public synchronized void saveSlewCalibration(final SlewCalibration slewCalibration) {
         try {
+            // Check if the calibration file exists, if it does delete then file and recreate it
             File calibrationFile = new File(String.format("/home/lvuser/%s.txt", "slewcalibration"));
             if (calibrationFile.exists()) {
                 calibrationFile.delete();
             }
             calibrationFile.createNewFile();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(calibrationFile));
-            writer.write(slewOffsets);
-            // Flush the data to the file
-            writer.flush();
-            writer.close();
+
+            // Create a buffered writer and write the contents of the slew calibration data
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(calibrationFile))) {
+                writer.write(slewCalibration.toString());
+                writer.flush();
+            }
             System.out.println("Calibration Successfully Saved!");
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -210,30 +212,17 @@ public class SwerveDrive implements RobotProperties {
      * @return
      */
     public synchronized void loadSlewCalibration() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(String.format("/home/lvuser/%s.txt", "slewcalibration")));
-            String dataString = reader.readLine();
-
-            // Parse the string
-            dataString = dataString.trim();
-            if (dataString.endsWith(";")) {
-                dataString = dataString.substring(0, dataString.length() - 1);
-                final String[] data = dataString.split(",");
-                if (data.length == 4) {
-                    final double lrSlewOffset = Double.parseDouble(data[0]);
-                    final double lfSlewOffset = Double.parseDouble(data[1]);
-                    final double rfSlewOffset = Double.parseDouble(data[2]);
-                    final double rrSlewOffset = Double.parseDouble(data[3]);
-
-                    lrUnit.setSlewOffset(lrSlewOffset);
-                    lfUnit.setSlewOffset(lfSlewOffset);
-                    rfUnit.setSlewOffset(rfSlewOffset);
-                    rrUnit.setSlewOffset(rrSlewOffset);
-                }
-            }
-            reader.close();
+        try (FileInputStream autonFile = new FileInputStream(String.format("/home/lvuser/%s.txt", "slewcalibration"))) {
+            // Gets the saved auton file as a coded input stream
+            CodedInputStream inputStream = CodedInputStream.newInstance(autonFile);
+            // Parses the data from the stream into the respecitve protobuf object
+            SlewCalibration slewCalibration = SlewCalibration.parseFrom(inputStream);
+            lfUnit.setSlewOffset(slewCalibration.getLeftFrontSlewOffset());
+            lrUnit.setSlewOffset(slewCalibration.getLeftRearSlewOffset());
+            rfUnit.setSlewOffset(slewCalibration.getRightFrontSlewOffset());
+            rrUnit.setSlewOffset(slewCalibration.getRightRearSlewOffset());
             System.out.println("Calibration Successfully Loaded!");
-        } catch (IOException e) {
+        } catch (Exception e) {
             System.err.printf("The Calibration File %s.txt could not be found!\n", "slewcalibration");
         }
     }
