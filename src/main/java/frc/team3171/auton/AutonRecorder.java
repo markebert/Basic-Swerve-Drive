@@ -1,15 +1,19 @@
 package frc.team3171.auton;
 
 // Java Imports
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
-import edu.wpi.first.wpilibj.Timer;
+// Google Imports
+import com.google.protobuf.CodedInputStream;
+
+// Team 3171 Imports
+import frc.team3171.protos.AutonRecorderData;
+import frc.team3171.protos.AutonRecorderData.Builder;
+import frc.team3171.protos.AutonTimestampData;
 
 /**
  * @author Mark Ebert
@@ -18,27 +22,27 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class AutonRecorder {
 
-    private final ConcurrentLinkedQueue<AutonRecorderData> autonQueue;
-    // private volatile AutonRecorderData lastData = null;
+    private final Builder autonRecorderData;
 
     /**
      * Constructor
      */
     public AutonRecorder() {
-        autonQueue = new ConcurrentLinkedQueue<>();
+        autonRecorderData = AutonRecorderData.newBuilder();
     }
 
     /**
      * 
+     * @param newData
      */
-    public void addNewData(final AutonRecorderData newData) {
-        if (newData != null) {
-            autonQueue.add(newData);
-            /*
-             * if (lastData == null) { autonQueue.add(newData); lastData = newData; } else
-             * if (lastData.isChanged(newData)) { autonQueue.add(newData); lastData =
-             * newData; }
-             */
+    public void addNewData(final AutonTimestampData newData) {
+        final int autonRecorderDataCount = autonRecorderData.getDataCount();
+        if (newData != null && autonRecorderDataCount > 1) {
+            if (isChanged(autonRecorderData.getData(autonRecorderDataCount - 1), newData)) {
+                autonRecorderData.addData(newData);
+            }
+        } else {
+            autonRecorderData.addData(newData);
         }
     }
 
@@ -46,48 +50,35 @@ public class AutonRecorder {
      * Clears whatever the AutonRecorder currently has saved.
      */
     public void clear() {
-        autonQueue.clear();
+        autonRecorderData.clearData();
     }
 
     /**
-     * Saves the current data collected by the auton recorder to the specified file
-     * path and clears the AutonRecorder.
+     * Saves the current data collected by the auton recorder to the specified file path and clears the AutonRecorder.
      * 
-     * @param autonFileName
-     *            The path to the file to save the auton data to.
+     * @param autonFileName The path to the file to save the auton data to.
      */
-    public void saveToFile(String autonFileName) {
+    public void saveToFile(final String autonFileName) {
         try {
+            // Check if the auton file exists, if it does delete the file and recreate it
             File autonFile = new File(String.format("/home/lvuser/%s.txt", autonFileName));
             if (autonFile.exists()) {
                 autonFile.delete();
             }
             autonFile.createNewFile();
-            BufferedWriter writer = new BufferedWriter(new FileWriter(autonFile));
-            AutonRecorderData startData = new AutonRecorderData();
-            startData.setFPGATimestamp(0);
-            writer.write(startData.toString());
-            writer.flush();
-            // CHANGE THE NAME OF THE TEXT FILE BASED OFF OF WHAT AUTON YOU ARE WRITING FOR
-            AutonRecorderData autonData = autonQueue.poll();
-            while (autonData != null) {
-                writer.write(autonData.toString());
+
+            // Create a buffered writter and write the contents of the auton recorder
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(autonFile))) {
+                AutonRecorderData recordedData = autonRecorderData.build();
+                writer.write(recordedData.toString());
                 writer.flush();
-                autonData = autonQueue.poll();
-                Timer.delay(.001);
             }
-            // Write an auton end
-            // AutonRecorderData endData = new AutonRecorderData();
-            // endData.setFPGATimestamp(autonData.getFPGATimestamp() + .1);
-            // writer.write(endData.toString());
-            // Flush the data to the file
-            writer.flush();
-            writer.close();
             System.out.println("Auton Successfully Saved!");
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            autonRecorderData.clearData();
         }
-        autonQueue.clear();
     }
 
     /**
@@ -95,20 +86,33 @@ public class AutonRecorder {
      * @param autonFileName
      * @return
      */
-    public static void loadFromFile(ConcurrentLinkedQueue<AutonRecorderData> autonPlaybackQueue, String autonFileName) {
-        autonPlaybackQueue.clear();
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(String.format("/home/lvuser/%s.txt", autonFileName)));
-            String line = reader.readLine();
-            while (line != null) {
-                autonPlaybackQueue.add(AutonRecorderData.fromString(line));
-                line = reader.readLine();
-            }
-            reader.close();
+    public static AutonRecorderData loadFromFile(final String autonFileName) {
+        AutonRecorderData autonRecordedData;
+        try (FileInputStream autonFile = new FileInputStream(String.format("/home/lvuser/%s.txt", autonFileName))) {
+            // Gets the saved auton file as a coded input stream
+            CodedInputStream test = CodedInputStream.newInstance(autonFile);
+            // Parses the data from the stream into the respecitve protobuf object
+            autonRecordedData = AutonRecorderData.parseFrom(test);
             System.out.println("Auton Successfully Loaded!");
-        } catch (IOException e) {
+        } catch (Exception e) {
+            autonRecordedData = AutonRecorderData.newBuilder().build();
             System.err.printf("The Auton File %s.txt could not be found!\n", autonFileName);
         }
+        return autonRecordedData;
+    }
+
+    /**
+     * Checks if the provided new data is different from the current data, as long as the new data's timestamp is later then the current timestamp, if so returns true, otherwise false.
+     * 
+     * @param newData The new set of data containing the new values to compare to the current values.
+     * @return Returns true if the new data is different, otherwise false.
+     */
+    public boolean isChanged(final AutonTimestampData oldData, final AutonTimestampData newData) {
+        if (newData.getTimestamp() >= oldData.getTimestamp()) {
+            return !newData.equals(oldData) || !newData.getDriverControllerState().equals(oldData.getDriverControllerState())
+                    || !newData.getOperatorControllerState().equals(oldData.getOperatorControllerState());
+        }
+        return false;
     }
 
 }

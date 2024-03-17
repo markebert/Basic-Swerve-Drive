@@ -1,5 +1,8 @@
 package frc.team3171;
 
+import edu.wpi.first.wpilibj.XboxController;
+import frc.team3171.protos.XboxControllerState;
+
 /**
  * @author Mark Ebert
  */
@@ -197,6 +200,28 @@ public class HelperFunctions {
 			}
 		}
 		return maxVector;
+	}
+
+	public static XboxControllerState Generate_Xbox_Controller_State(final XboxController controller) {
+		var builder = XboxControllerState.newBuilder();
+		builder.setLeftX(controller.getLeftX());
+		builder.setLeftY(controller.getLeftY());
+		builder.setRightX(controller.getRightX());
+		builder.setRightY(controller.getRightY());
+		builder.setLeftTriggerAxis(controller.getLeftTriggerAxis());
+		builder.setRightTriggerAxis(controller.getRightTriggerAxis());
+		builder.setPov(controller.getPOV());
+		builder.setAButton(controller.getAButton());
+		builder.setBButton(controller.getBButton());
+		builder.setXButton(controller.getXButton());
+		builder.setYButton(controller.getYButton());
+		builder.setBackButton(controller.getBackButton());
+		builder.setStartButton(controller.getStartButton());
+		builder.setLeftBumper(controller.getLeftBumper());
+		builder.setRightBumper(controller.getRightBumper());
+		builder.setLeftStickButton(controller.getLeftStickButton());
+		builder.setRightStickButton(controller.getRightStickButton());
+		return builder.build();
 	}
 
 }

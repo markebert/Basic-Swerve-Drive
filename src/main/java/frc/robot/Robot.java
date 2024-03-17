@@ -5,8 +5,10 @@
 package frc.robot;
 
 // Java Imports
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.LinkedList;
+import java.util.Queue;
 
+// CTRE Imports
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 // FRC Imports
@@ -18,11 +20,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.team3171.drive.SwerveDrive;
+import frc.team3171.protos.AutonRecorderData;
+import frc.team3171.protos.AutonTimestampData;
 import frc.team3171.protos.XboxControllerState;
 import frc.team3171.HelperFunctions;
 import frc.team3171.auton.AutonRecorder;
-import frc.team3171.auton.AutonRecorderData;
 import frc.team3171.controllers.ThreadedPIDController;
+import static frc.team3171.HelperFunctions.Generate_Xbox_Controller_State;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 
 /**
@@ -41,8 +45,8 @@ public class Robot extends TimedRobot implements RobotProperties {
 
   // Auton Recorder
   private AutonRecorder autonRecorder;
-  private ConcurrentLinkedQueue<AutonRecorderData> autonPlaybackQueue;
-  private AutonRecorderData playbackData;
+  private Queue<AutonTimestampData> autonPlaybackQueue;
+  private AutonTimestampData playbackData;
   private double autonStartTime;
   private boolean saveNewAuton;
 
@@ -80,7 +84,7 @@ public class Robot extends TimedRobot implements RobotProperties {
 
     // Auton Recorder init
     autonRecorder = new AutonRecorder();
-    autonPlaybackQueue = new ConcurrentLinkedQueue<>();
+    autonPlaybackQueue = new LinkedList<>();
     playbackData = null;
     saveNewAuton = false;
 
@@ -185,8 +189,12 @@ public class Robot extends TimedRobot implements RobotProperties {
         playbackData = null;
         break;
       default:
-        AutonRecorder.loadFromFile(autonPlaybackQueue, selectedAutonMode);
-        playbackData = autonPlaybackQueue.poll();
+        final AutonRecorderData autonRecorderData = AutonRecorder.loadFromFile(selectedAutonMode);
+        if (autonRecorderData != null) {
+          autonPlaybackQueue.clear();
+          autonPlaybackQueue.addAll(autonRecorderData.getDataList());
+          playbackData = autonPlaybackQueue.poll();
+        }
         robotControlsInit();
         break;
       }
@@ -205,14 +213,14 @@ public class Robot extends TimedRobot implements RobotProperties {
       // Plays the recorded auton if theres a valid next step, otherwise disables
       if (playbackData != null) {
         // Get the controller states
-        final XboxControllerState driveControllerState = playbackData.getDriveControllerState();
+        final XboxControllerState driveControllerState = playbackData.getDriverControllerState();
         final XboxControllerState operatorControllerState = playbackData.getOperatorControllerState();
 
         // Robot drive controls
         robotControlsPeriodic(driveControllerState, operatorControllerState);
 
         // Checks for new data and when to switch to it
-        if ((Timer.getFPGATimestamp() - autonStartTime) >= playbackData.getFPGATimestamp()) {
+        if ((Timer.getFPGATimestamp() - autonStartTime) >= playbackData.getTimestamp()) {
           playbackData = autonPlaybackQueue.poll();
         }
       } else {
@@ -241,8 +249,8 @@ public class Robot extends TimedRobot implements RobotProperties {
   @Override
   public void teleopPeriodic() {
     // Get the controller states
-    final XboxControllerState driveControllerState = null;
-    final XboxControllerState operatorControllerState = null;
+    final XboxControllerState driveControllerState = Generate_Xbox_Controller_State(driveController);
+    final XboxControllerState operatorControllerState = XboxControllerState.getDefaultInstance();
 
     // Robot drive controls
     robotControlsPeriodic(driveControllerState, operatorControllerState);
@@ -256,7 +264,11 @@ public class Robot extends TimedRobot implements RobotProperties {
         break;
       default:
         // Adds the recorded data to the auton recorder, but only if the data is new
-        autonRecorder.addNewData(new AutonRecorderData(autonTimeStamp, driveControllerState, operatorControllerState));
+        var autonTimestampData = AutonTimestampData.newBuilder();
+        autonTimestampData.setTimestamp(autonTimeStamp);
+        autonTimestampData.setDriverControllerState(driveControllerState);
+        autonTimestampData.setOperatorControllerState(operatorControllerState);
+        autonRecorder.addNewData(autonTimestampData.build());
         break;
       }
     }

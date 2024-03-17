@@ -5,9 +5,12 @@ import "frc/team3171/protos/xbox_controller_state.proto";
 package frc.team3171.protos;
 option java_multiple_files = true;
 
-message AutonRecorderData {
+message AutonTimestampData {
      double timestamp = 1;
      XboxControllerState driverControllerState = 2;
      XboxControllerState operatorControllerState = 3;
 }
 
+message AutonRecorderData {
+     repeated AutonTimestampData data = 1;
+}
