@@ -3,7 +3,6 @@ syntax = "proto3";
 import "frc/team3171/protos/xbox_controller_state.proto";
 
 package frc.team3171.protos;
-option java_multiple_files = true;
 
 message AutonTimestampData {
      double timestamp = 1;

@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 package frc.team3171.protos;
-option java_multiple_files = true;
 
 message XboxControllerState {
      optional double leftX = 1;

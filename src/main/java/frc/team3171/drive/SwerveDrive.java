@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.robot.RobotProperties;
-import frc.team3171.protos.SlewCalibration;
+import frc.team3171.protos.SlewDrive.SlewCalibration;
 import frc.team3171.sensors.UDPClient;
 import static frc.team3171.HelperFunctions.Normalize_Gryo_Value;
 import static frc.team3171.HelperFunctions.Add_Two_Vectors;

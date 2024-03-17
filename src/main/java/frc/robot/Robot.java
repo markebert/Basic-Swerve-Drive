@@ -20,9 +20,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 // Team 3171 Imports
 import frc.team3171.drive.SwerveDrive;
-import frc.team3171.protos.AutonRecorderData;
-import frc.team3171.protos.AutonTimestampData;
-import frc.team3171.protos.XboxControllerState;
+import frc.team3171.protos.AutonData.AutonRecorderData;
+import frc.team3171.protos.AutonData.AutonTimestampData;
+import frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState;
 import frc.team3171.HelperFunctions;
 import frc.team3171.auton.AutonRecorder;
 import frc.team3171.controllers.ThreadedPIDController;

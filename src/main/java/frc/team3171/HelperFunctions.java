@@ -1,7 +1,7 @@
 package frc.team3171;
 
 import edu.wpi.first.wpilibj.XboxController;
-import frc.team3171.protos.XboxControllerState;
+import frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState;
 
 /**
  * @author Mark Ebert

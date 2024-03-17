@@ -15,14 +15,1682 @@ public final class AutonData {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  static final com.google.protobuf.Descriptors.Descriptor
+  public interface AutonTimestampDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:frc.team3171.protos.AutonTimestampData)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>double timestamp = 1;</code>
+     * @return The timestamp.
+     */
+    double getTimestamp();
+
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     * @return Whether the driverControllerState field is set.
+     */
+    boolean hasDriverControllerState();
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     * @return The driverControllerState.
+     */
+    frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getDriverControllerState();
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     */
+    frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getDriverControllerStateOrBuilder();
+
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     * @return Whether the operatorControllerState field is set.
+     */
+    boolean hasOperatorControllerState();
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     * @return The operatorControllerState.
+     */
+    frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getOperatorControllerState();
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     */
+    frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getOperatorControllerStateOrBuilder();
+  }
+  /**
+   * Protobuf type {@code frc.team3171.protos.AutonTimestampData}
+   */
+  public static final class AutonTimestampData extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:frc.team3171.protos.AutonTimestampData)
+      AutonTimestampDataOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AutonTimestampData.newBuilder() to construct.
+    private AutonTimestampData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AutonTimestampData() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new AutonTimestampData();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonTimestampData_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonTimestampData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              frc.team3171.protos.AutonData.AutonTimestampData.class, frc.team3171.protos.AutonData.AutonTimestampData.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int TIMESTAMP_FIELD_NUMBER = 1;
+    private double timestamp_ = 0D;
+    /**
+     * <code>double timestamp = 1;</code>
+     * @return The timestamp.
+     */
+    @java.lang.Override
+    public double getTimestamp() {
+      return timestamp_;
+    }
+
+    public static final int DRIVERCONTROLLERSTATE_FIELD_NUMBER = 2;
+    private frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState driverControllerState_;
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     * @return Whether the driverControllerState field is set.
+     */
+    @java.lang.Override
+    public boolean hasDriverControllerState() {
+      return ((bitField0_ & 0x00000001) != 0);
+    }
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     * @return The driverControllerState.
+     */
+    @java.lang.Override
+    public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getDriverControllerState() {
+      return driverControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : driverControllerState_;
+    }
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+     */
+    @java.lang.Override
+    public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getDriverControllerStateOrBuilder() {
+      return driverControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : driverControllerState_;
+    }
+
+    public static final int OPERATORCONTROLLERSTATE_FIELD_NUMBER = 3;
+    private frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState operatorControllerState_;
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     * @return Whether the operatorControllerState field is set.
+     */
+    @java.lang.Override
+    public boolean hasOperatorControllerState() {
+      return ((bitField0_ & 0x00000002) != 0);
+    }
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     * @return The operatorControllerState.
+     */
+    @java.lang.Override
+    public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getOperatorControllerState() {
+      return operatorControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : operatorControllerState_;
+    }
+    /**
+     * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+     */
+    @java.lang.Override
+    public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getOperatorControllerStateOrBuilder() {
+      return operatorControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : operatorControllerState_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (java.lang.Double.doubleToRawLongBits(timestamp_) != 0) {
+        output.writeDouble(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        output.writeMessage(2, getDriverControllerState());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        output.writeMessage(3, getOperatorControllerState());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (java.lang.Double.doubleToRawLongBits(timestamp_) != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, timestamp_);
+      }
+      if (((bitField0_ & 0x00000001) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, getDriverControllerState());
+      }
+      if (((bitField0_ & 0x00000002) != 0)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, getOperatorControllerState());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof frc.team3171.protos.AutonData.AutonTimestampData)) {
+        return super.equals(obj);
+      }
+      frc.team3171.protos.AutonData.AutonTimestampData other = (frc.team3171.protos.AutonData.AutonTimestampData) obj;
+
+      if (java.lang.Double.doubleToLongBits(getTimestamp())
+          != java.lang.Double.doubleToLongBits(
+              other.getTimestamp())) return false;
+      if (hasDriverControllerState() != other.hasDriverControllerState()) return false;
+      if (hasDriverControllerState()) {
+        if (!getDriverControllerState()
+            .equals(other.getDriverControllerState())) return false;
+      }
+      if (hasOperatorControllerState() != other.hasOperatorControllerState()) return false;
+      if (hasOperatorControllerState()) {
+        if (!getOperatorControllerState()
+            .equals(other.getOperatorControllerState())) return false;
+      }
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getTimestamp()));
+      if (hasDriverControllerState()) {
+        hash = (37 * hash) + DRIVERCONTROLLERSTATE_FIELD_NUMBER;
+        hash = (53 * hash) + getDriverControllerState().hashCode();
+      }
+      if (hasOperatorControllerState()) {
+        hash = (37 * hash) + OPERATORCONTROLLERSTATE_FIELD_NUMBER;
+        hash = (53 * hash) + getOperatorControllerState().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.AutonData.AutonTimestampData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(frc.team3171.protos.AutonData.AutonTimestampData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code frc.team3171.protos.AutonTimestampData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:frc.team3171.protos.AutonTimestampData)
+        frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonTimestampData_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonTimestampData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                frc.team3171.protos.AutonData.AutonTimestampData.class, frc.team3171.protos.AutonData.AutonTimestampData.Builder.class);
+      }
+
+      // Construct using frc.team3171.protos.AutonData.AutonTimestampData.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getDriverControllerStateFieldBuilder();
+          getOperatorControllerStateFieldBuilder();
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        timestamp_ = 0D;
+        driverControllerState_ = null;
+        if (driverControllerStateBuilder_ != null) {
+          driverControllerStateBuilder_.dispose();
+          driverControllerStateBuilder_ = null;
+        }
+        operatorControllerState_ = null;
+        if (operatorControllerStateBuilder_ != null) {
+          operatorControllerStateBuilder_.dispose();
+          operatorControllerStateBuilder_ = null;
+        }
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonTimestampData_descriptor;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonTimestampData getDefaultInstanceForType() {
+        return frc.team3171.protos.AutonData.AutonTimestampData.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonTimestampData build() {
+        frc.team3171.protos.AutonData.AutonTimestampData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonTimestampData buildPartial() {
+        frc.team3171.protos.AutonData.AutonTimestampData result = new frc.team3171.protos.AutonData.AutonTimestampData(this);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartial0(frc.team3171.protos.AutonData.AutonTimestampData result) {
+        int from_bitField0_ = bitField0_;
+        if (((from_bitField0_ & 0x00000001) != 0)) {
+          result.timestamp_ = timestamp_;
+        }
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000002) != 0)) {
+          result.driverControllerState_ = driverControllerStateBuilder_ == null
+              ? driverControllerState_
+              : driverControllerStateBuilder_.build();
+          to_bitField0_ |= 0x00000001;
+        }
+        if (((from_bitField0_ & 0x00000004) != 0)) {
+          result.operatorControllerState_ = operatorControllerStateBuilder_ == null
+              ? operatorControllerState_
+              : operatorControllerStateBuilder_.build();
+          to_bitField0_ |= 0x00000002;
+        }
+        result.bitField0_ |= to_bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof frc.team3171.protos.AutonData.AutonTimestampData) {
+          return mergeFrom((frc.team3171.protos.AutonData.AutonTimestampData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(frc.team3171.protos.AutonData.AutonTimestampData other) {
+        if (other == frc.team3171.protos.AutonData.AutonTimestampData.getDefaultInstance()) return this;
+        if (other.getTimestamp() != 0D) {
+          setTimestamp(other.getTimestamp());
+        }
+        if (other.hasDriverControllerState()) {
+          mergeDriverControllerState(other.getDriverControllerState());
+        }
+        if (other.hasOperatorControllerState()) {
+          mergeOperatorControllerState(other.getOperatorControllerState());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 9: {
+                timestamp_ = input.readDouble();
+                bitField0_ |= 0x00000001;
+                break;
+              } // case 9
+              case 18: {
+                input.readMessage(
+                    getDriverControllerStateFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000002;
+                break;
+              } // case 18
+              case 26: {
+                input.readMessage(
+                    getOperatorControllerStateFieldBuilder().getBuilder(),
+                    extensionRegistry);
+                bitField0_ |= 0x00000004;
+                break;
+              } // case 26
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private double timestamp_ ;
+      /**
+       * <code>double timestamp = 1;</code>
+       * @return The timestamp.
+       */
+      @java.lang.Override
+      public double getTimestamp() {
+        return timestamp_;
+      }
+      /**
+       * <code>double timestamp = 1;</code>
+       * @param value The timestamp to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTimestamp(double value) {
+
+        timestamp_ = value;
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double timestamp = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTimestamp() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        timestamp_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState driverControllerState_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder> driverControllerStateBuilder_;
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       * @return Whether the driverControllerState field is set.
+       */
+      public boolean hasDriverControllerState() {
+        return ((bitField0_ & 0x00000002) != 0);
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       * @return The driverControllerState.
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getDriverControllerState() {
+        if (driverControllerStateBuilder_ == null) {
+          return driverControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : driverControllerState_;
+        } else {
+          return driverControllerStateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public Builder setDriverControllerState(frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState value) {
+        if (driverControllerStateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          driverControllerState_ = value;
+        } else {
+          driverControllerStateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public Builder setDriverControllerState(
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder builderForValue) {
+        if (driverControllerStateBuilder_ == null) {
+          driverControllerState_ = builderForValue.build();
+        } else {
+          driverControllerStateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public Builder mergeDriverControllerState(frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState value) {
+        if (driverControllerStateBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) != 0) &&
+            driverControllerState_ != null &&
+            driverControllerState_ != frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance()) {
+            getDriverControllerStateBuilder().mergeFrom(value);
+          } else {
+            driverControllerState_ = value;
+          }
+        } else {
+          driverControllerStateBuilder_.mergeFrom(value);
+        }
+        if (driverControllerState_ != null) {
+          bitField0_ |= 0x00000002;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public Builder clearDriverControllerState() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        driverControllerState_ = null;
+        if (driverControllerStateBuilder_ != null) {
+          driverControllerStateBuilder_.dispose();
+          driverControllerStateBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder getDriverControllerStateBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getDriverControllerStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getDriverControllerStateOrBuilder() {
+        if (driverControllerStateBuilder_ != null) {
+          return driverControllerStateBuilder_.getMessageOrBuilder();
+        } else {
+          return driverControllerState_ == null ?
+              frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : driverControllerState_;
+        }
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState driverControllerState = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder> 
+          getDriverControllerStateFieldBuilder() {
+        if (driverControllerStateBuilder_ == null) {
+          driverControllerStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder>(
+                  getDriverControllerState(),
+                  getParentForChildren(),
+                  isClean());
+          driverControllerState_ = null;
+        }
+        return driverControllerStateBuilder_;
+      }
+
+      private frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState operatorControllerState_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder> operatorControllerStateBuilder_;
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       * @return Whether the operatorControllerState field is set.
+       */
+      public boolean hasOperatorControllerState() {
+        return ((bitField0_ & 0x00000004) != 0);
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       * @return The operatorControllerState.
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState getOperatorControllerState() {
+        if (operatorControllerStateBuilder_ == null) {
+          return operatorControllerState_ == null ? frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : operatorControllerState_;
+        } else {
+          return operatorControllerStateBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public Builder setOperatorControllerState(frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState value) {
+        if (operatorControllerStateBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          operatorControllerState_ = value;
+        } else {
+          operatorControllerStateBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public Builder setOperatorControllerState(
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder builderForValue) {
+        if (operatorControllerStateBuilder_ == null) {
+          operatorControllerState_ = builderForValue.build();
+        } else {
+          operatorControllerStateBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public Builder mergeOperatorControllerState(frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState value) {
+        if (operatorControllerStateBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) != 0) &&
+            operatorControllerState_ != null &&
+            operatorControllerState_ != frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance()) {
+            getOperatorControllerStateBuilder().mergeFrom(value);
+          } else {
+            operatorControllerState_ = value;
+          }
+        } else {
+          operatorControllerStateBuilder_.mergeFrom(value);
+        }
+        if (operatorControllerState_ != null) {
+          bitField0_ |= 0x00000004;
+          onChanged();
+        }
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public Builder clearOperatorControllerState() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        operatorControllerState_ = null;
+        if (operatorControllerStateBuilder_ != null) {
+          operatorControllerStateBuilder_.dispose();
+          operatorControllerStateBuilder_ = null;
+        }
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder getOperatorControllerStateBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getOperatorControllerStateFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      public frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder getOperatorControllerStateOrBuilder() {
+        if (operatorControllerStateBuilder_ != null) {
+          return operatorControllerStateBuilder_.getMessageOrBuilder();
+        } else {
+          return operatorControllerState_ == null ?
+              frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.getDefaultInstance() : operatorControllerState_;
+        }
+      }
+      /**
+       * <code>.frc.team3171.protos.XboxControllerState operatorControllerState = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder> 
+          getOperatorControllerStateFieldBuilder() {
+        if (operatorControllerStateBuilder_ == null) {
+          operatorControllerStateBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerState.Builder, frc.team3171.protos.XboxControllerStateOuterClass.XboxControllerStateOrBuilder>(
+                  getOperatorControllerState(),
+                  getParentForChildren(),
+                  isClean());
+          operatorControllerState_ = null;
+        }
+        return operatorControllerStateBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:frc.team3171.protos.AutonTimestampData)
+    }
+
+    // @@protoc_insertion_point(class_scope:frc.team3171.protos.AutonTimestampData)
+    private static final frc.team3171.protos.AutonData.AutonTimestampData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new frc.team3171.protos.AutonData.AutonTimestampData();
+    }
+
+    public static frc.team3171.protos.AutonData.AutonTimestampData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AutonTimestampData>
+        PARSER = new com.google.protobuf.AbstractParser<AutonTimestampData>() {
+      @java.lang.Override
+      public AutonTimestampData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<AutonTimestampData> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AutonTimestampData> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public frc.team3171.protos.AutonData.AutonTimestampData getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AutonRecorderDataOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:frc.team3171.protos.AutonRecorderData)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    java.util.List<frc.team3171.protos.AutonData.AutonTimestampData> 
+        getDataList();
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    frc.team3171.protos.AutonData.AutonTimestampData getData(int index);
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    int getDataCount();
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    java.util.List<? extends frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder> 
+        getDataOrBuilderList();
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder getDataOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code frc.team3171.protos.AutonRecorderData}
+   */
+  public static final class AutonRecorderData extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:frc.team3171.protos.AutonRecorderData)
+      AutonRecorderDataOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use AutonRecorderData.newBuilder() to construct.
+    private AutonRecorderData(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AutonRecorderData() {
+      data_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new AutonRecorderData();
+    }
+
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonRecorderData_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonRecorderData_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              frc.team3171.protos.AutonData.AutonRecorderData.class, frc.team3171.protos.AutonData.AutonRecorderData.Builder.class);
+    }
+
+    public static final int DATA_FIELD_NUMBER = 1;
+    @SuppressWarnings("serial")
+    private java.util.List<frc.team3171.protos.AutonData.AutonTimestampData> data_;
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<frc.team3171.protos.AutonData.AutonTimestampData> getDataList() {
+      return data_;
+    }
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    @java.lang.Override
+    public java.util.List<? extends frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder> 
+        getDataOrBuilderList() {
+      return data_;
+    }
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    @java.lang.Override
+    public int getDataCount() {
+      return data_.size();
+    }
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    @java.lang.Override
+    public frc.team3171.protos.AutonData.AutonTimestampData getData(int index) {
+      return data_.get(index);
+    }
+    /**
+     * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+     */
+    @java.lang.Override
+    public frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder getDataOrBuilder(
+        int index) {
+      return data_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      for (int i = 0; i < data_.size(); i++) {
+        output.writeMessage(1, data_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < data_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, data_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof frc.team3171.protos.AutonData.AutonRecorderData)) {
+        return super.equals(obj);
+      }
+      frc.team3171.protos.AutonData.AutonRecorderData other = (frc.team3171.protos.AutonData.AutonRecorderData) obj;
+
+      if (!getDataList()
+          .equals(other.getDataList())) return false;
+      if (!getUnknownFields().equals(other.getUnknownFields())) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      if (getDataCount() > 0) {
+        hash = (37 * hash) + DATA_FIELD_NUMBER;
+        hash = (53 * hash) + getDataList().hashCode();
+      }
+      hash = (29 * hash) + getUnknownFields().hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static frc.team3171.protos.AutonData.AutonRecorderData parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(frc.team3171.protos.AutonData.AutonRecorderData prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code frc.team3171.protos.AutonRecorderData}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:frc.team3171.protos.AutonRecorderData)
+        frc.team3171.protos.AutonData.AutonRecorderDataOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonRecorderData_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonRecorderData_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                frc.team3171.protos.AutonData.AutonRecorderData.class, frc.team3171.protos.AutonData.AutonRecorderData.Builder.class);
+      }
+
+      // Construct using frc.team3171.protos.AutonData.AutonRecorderData.newBuilder()
+      private Builder() {
+
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        bitField0_ = 0;
+        if (dataBuilder_ == null) {
+          data_ = java.util.Collections.emptyList();
+        } else {
+          data_ = null;
+          dataBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return frc.team3171.protos.AutonData.internal_static_frc_team3171_protos_AutonRecorderData_descriptor;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonRecorderData getDefaultInstanceForType() {
+        return frc.team3171.protos.AutonData.AutonRecorderData.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonRecorderData build() {
+        frc.team3171.protos.AutonData.AutonRecorderData result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public frc.team3171.protos.AutonData.AutonRecorderData buildPartial() {
+        frc.team3171.protos.AutonData.AutonRecorderData result = new frc.team3171.protos.AutonData.AutonRecorderData(this);
+        buildPartialRepeatedFields(result);
+        if (bitField0_ != 0) { buildPartial0(result); }
+        onBuilt();
+        return result;
+      }
+
+      private void buildPartialRepeatedFields(frc.team3171.protos.AutonData.AutonRecorderData result) {
+        if (dataBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) != 0)) {
+            data_ = java.util.Collections.unmodifiableList(data_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.data_ = data_;
+        } else {
+          result.data_ = dataBuilder_.build();
+        }
+      }
+
+      private void buildPartial0(frc.team3171.protos.AutonData.AutonRecorderData result) {
+        int from_bitField0_ = bitField0_;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof frc.team3171.protos.AutonData.AutonRecorderData) {
+          return mergeFrom((frc.team3171.protos.AutonData.AutonRecorderData)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(frc.team3171.protos.AutonData.AutonRecorderData other) {
+        if (other == frc.team3171.protos.AutonData.AutonRecorderData.getDefaultInstance()) return this;
+        if (dataBuilder_ == null) {
+          if (!other.data_.isEmpty()) {
+            if (data_.isEmpty()) {
+              data_ = other.data_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureDataIsMutable();
+              data_.addAll(other.data_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.data_.isEmpty()) {
+            if (dataBuilder_.isEmpty()) {
+              dataBuilder_.dispose();
+              dataBuilder_ = null;
+              data_ = other.data_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              dataBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getDataFieldBuilder() : null;
+            } else {
+              dataBuilder_.addAllMessages(other.data_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        if (extensionRegistry == null) {
+          throw new java.lang.NullPointerException();
+        }
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              case 10: {
+                frc.team3171.protos.AutonData.AutonTimestampData m =
+                    input.readMessage(
+                        frc.team3171.protos.AutonData.AutonTimestampData.parser(),
+                        extensionRegistry);
+                if (dataBuilder_ == null) {
+                  ensureDataIsMutable();
+                  data_.add(m);
+                } else {
+                  dataBuilder_.addMessage(m);
+                }
+                break;
+              } // case 10
+              default: {
+                if (!super.parseUnknownField(input, extensionRegistry, tag)) {
+                  done = true; // was an endgroup tag
+                }
+                break;
+              } // default:
+            } // switch (tag)
+          } // while (!done)
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.unwrapIOException();
+        } finally {
+          onChanged();
+        } // finally
+        return this;
+      }
+      private int bitField0_;
+
+      private java.util.List<frc.team3171.protos.AutonData.AutonTimestampData> data_ =
+        java.util.Collections.emptyList();
+      private void ensureDataIsMutable() {
+        if (!((bitField0_ & 0x00000001) != 0)) {
+          data_ = new java.util.ArrayList<frc.team3171.protos.AutonData.AutonTimestampData>(data_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          frc.team3171.protos.AutonData.AutonTimestampData, frc.team3171.protos.AutonData.AutonTimestampData.Builder, frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder> dataBuilder_;
+
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public java.util.List<frc.team3171.protos.AutonData.AutonTimestampData> getDataList() {
+        if (dataBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(data_);
+        } else {
+          return dataBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public int getDataCount() {
+        if (dataBuilder_ == null) {
+          return data_.size();
+        } else {
+          return dataBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public frc.team3171.protos.AutonData.AutonTimestampData getData(int index) {
+        if (dataBuilder_ == null) {
+          return data_.get(index);
+        } else {
+          return dataBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder setData(
+          int index, frc.team3171.protos.AutonData.AutonTimestampData value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDataIsMutable();
+          data_.set(index, value);
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder setData(
+          int index, frc.team3171.protos.AutonData.AutonTimestampData.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          ensureDataIsMutable();
+          data_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          dataBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder addData(frc.team3171.protos.AutonData.AutonTimestampData value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDataIsMutable();
+          data_.add(value);
+          onChanged();
+        } else {
+          dataBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder addData(
+          int index, frc.team3171.protos.AutonData.AutonTimestampData value) {
+        if (dataBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureDataIsMutable();
+          data_.add(index, value);
+          onChanged();
+        } else {
+          dataBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder addData(
+          frc.team3171.protos.AutonData.AutonTimestampData.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          ensureDataIsMutable();
+          data_.add(builderForValue.build());
+          onChanged();
+        } else {
+          dataBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder addData(
+          int index, frc.team3171.protos.AutonData.AutonTimestampData.Builder builderForValue) {
+        if (dataBuilder_ == null) {
+          ensureDataIsMutable();
+          data_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          dataBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder addAllData(
+          java.lang.Iterable<? extends frc.team3171.protos.AutonData.AutonTimestampData> values) {
+        if (dataBuilder_ == null) {
+          ensureDataIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, data_);
+          onChanged();
+        } else {
+          dataBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder clearData() {
+        if (dataBuilder_ == null) {
+          data_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          dataBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public Builder removeData(int index) {
+        if (dataBuilder_ == null) {
+          ensureDataIsMutable();
+          data_.remove(index);
+          onChanged();
+        } else {
+          dataBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public frc.team3171.protos.AutonData.AutonTimestampData.Builder getDataBuilder(
+          int index) {
+        return getDataFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder getDataOrBuilder(
+          int index) {
+        if (dataBuilder_ == null) {
+          return data_.get(index);  } else {
+          return dataBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public java.util.List<? extends frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder> 
+           getDataOrBuilderList() {
+        if (dataBuilder_ != null) {
+          return dataBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(data_);
+        }
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public frc.team3171.protos.AutonData.AutonTimestampData.Builder addDataBuilder() {
+        return getDataFieldBuilder().addBuilder(
+            frc.team3171.protos.AutonData.AutonTimestampData.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public frc.team3171.protos.AutonData.AutonTimestampData.Builder addDataBuilder(
+          int index) {
+        return getDataFieldBuilder().addBuilder(
+            index, frc.team3171.protos.AutonData.AutonTimestampData.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .frc.team3171.protos.AutonTimestampData data = 1;</code>
+       */
+      public java.util.List<frc.team3171.protos.AutonData.AutonTimestampData.Builder> 
+           getDataBuilderList() {
+        return getDataFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          frc.team3171.protos.AutonData.AutonTimestampData, frc.team3171.protos.AutonData.AutonTimestampData.Builder, frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder> 
+          getDataFieldBuilder() {
+        if (dataBuilder_ == null) {
+          dataBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              frc.team3171.protos.AutonData.AutonTimestampData, frc.team3171.protos.AutonData.AutonTimestampData.Builder, frc.team3171.protos.AutonData.AutonTimestampDataOrBuilder>(
+                  data_,
+                  ((bitField0_ & 0x00000001) != 0),
+                  getParentForChildren(),
+                  isClean());
+          data_ = null;
+        }
+        return dataBuilder_;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:frc.team3171.protos.AutonRecorderData)
+    }
+
+    // @@protoc_insertion_point(class_scope:frc.team3171.protos.AutonRecorderData)
+    private static final frc.team3171.protos.AutonData.AutonRecorderData DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new frc.team3171.protos.AutonData.AutonRecorderData();
+    }
+
+    public static frc.team3171.protos.AutonData.AutonRecorderData getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AutonRecorderData>
+        PARSER = new com.google.protobuf.AbstractParser<AutonRecorderData>() {
+      @java.lang.Override
+      public AutonRecorderData parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        Builder builder = newBuilder();
+        try {
+          builder.mergeFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(builder.buildPartial());
+        } catch (com.google.protobuf.UninitializedMessageException e) {
+          throw e.asInvalidProtocolBufferException().setUnfinishedMessage(builder.buildPartial());
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(e)
+              .setUnfinishedMessage(builder.buildPartial());
+        }
+        return builder.buildPartial();
+      }
+    };
+
+    public static com.google.protobuf.Parser<AutonRecorderData> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AutonRecorderData> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public frc.team3171.protos.AutonData.AutonRecorderData getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_frc_team3171_protos_AutonTimestampData_descriptor;
-  static final 
+  private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_frc_team3171_protos_AutonTimestampData_fieldAccessorTable;
-  static final com.google.protobuf.Descriptors.Descriptor
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_frc_team3171_protos_AutonRecorderData_descriptor;
-  static final 
+  private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_frc_team3171_protos_AutonRecorderData_fieldAccessorTable;
 
@@ -43,7 +1711,7 @@ public final class AutonData {
       "ollerState\030\003 \001(\0132(.frc.team3171.protos.X" +
       "boxControllerState\"J\n\021AutonRecorderData\022" +
       "5\n\004data\030\001 \003(\0132\'.frc.team3171.protos.Auto" +
-      "nTimestampDataB\002P\001b\006proto3"
+      "nTimestampDatab\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -10,11 +10,11 @@ import java.io.IOException;
 // Google Imports
 import com.google.protobuf.CodedInputStream;
 
-// Team 3171 Imports
-import frc.team3171.protos.AutonRecorderData;
-import frc.team3171.protos.AutonRecorderData.Builder;
-import frc.team3171.protos.AutonTimestampData;
+import frc.team3171.protos.AutonData.AutonRecorderData;
+import frc.team3171.protos.AutonData.AutonRecorderData.Builder;
+import frc.team3171.protos.AutonData.AutonTimestampData;
 
+// Team 3171 Imports
 /**
  * @author Mark Ebert
  * @author Charles Fee
